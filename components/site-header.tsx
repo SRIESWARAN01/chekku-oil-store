@@ -15,7 +15,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
             <img
-              src="/logo.jpg"
+              src="/logo.png"
               alt={t("brand")}
               className="h-9 w-9 rounded-full border border-leaf/10 object-cover"
             />
