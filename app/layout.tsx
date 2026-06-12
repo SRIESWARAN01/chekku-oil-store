@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, JetBrains_Mono, Manrope } from "next/font/google";
 import { LanguageProvider } from "@/lib/language-context";
+import { MobileNav } from "@/components/mobile-nav";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -49,7 +50,10 @@ export default function RootLayout({
       className={`${fraunces.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
     >
       <body>
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          {children}
+          <MobileNav />
+        </LanguageProvider>
       </body>
     </html>
   );

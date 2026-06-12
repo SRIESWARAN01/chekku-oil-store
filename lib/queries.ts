@@ -75,6 +75,7 @@ export interface SiteSettings {
   gst_certificate_issue_date: string;
   additional_branches: string;
   address: string;
+  hero_banner_image?: string;
 }
 
 // ── Default settings ─────────────────────────────────────────────────────────
@@ -100,6 +101,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   gst_certificate_issue_date: "22/01/2026",
   additional_branches: "0 (No additional registered business locations)",
   address: "No. 265/3B, Veppampatti Vilakku, Peraiyur Main Road Near Bus Stop, Pappinaickanpatti, Peraiyur, Madurai District, Tamil Nadu - 625705, India",
+  hero_banner_image: "",
 };
 
 // ── Helpers ───────────────────────────────────────────────────────────────────

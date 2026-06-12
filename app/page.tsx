@@ -19,7 +19,7 @@ export default async function HomePage() {
 
       <main className="min-h-screen bg-white pb-24">
         {/* Localized Hero Banner */}
-        <HeroBanner businessName={settings.business_name} />
+        <HeroBanner businessName={settings.business_name} heroBannerImage={settings.hero_banner_image} />
 
         {/* Dynamic Savings Calculator */}
         <section className="container py-8 border-b border-gray-50 bg-[#fbfbfa]">

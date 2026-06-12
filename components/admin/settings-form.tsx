@@ -24,6 +24,7 @@ export interface SettingsValues {
   gst_certificate_issue_date: string;
   additional_branches: string;
   address: string;
+  hero_banner_image?: string;
 }
 
 const INITIAL: SettingsActionState = {};
@@ -110,6 +111,13 @@ export function SettingsForm({ settings }: { settings: SettingsValues }) {
             label="Business hours"
             name="business_hours"
             defaultValue={settings.business_hours}
+          />
+          <Field
+            label="Home Screen Banner Image URL"
+            name="hero_banner_image"
+            defaultValue={settings.hero_banner_image || ""}
+            placeholder="https://example.com/banner.jpg"
+            hint="Set a custom background image URL for the home screen hero banner."
           />
         </div>
       </section>

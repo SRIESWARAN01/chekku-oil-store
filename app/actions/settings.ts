@@ -48,6 +48,7 @@ export async function saveSettings(
       formData.get("additional_branches") ?? "",
     ).trim(),
     address: String(formData.get("address") ?? "").trim(),
+    hero_banner_image: String(formData.get("hero_banner_image") ?? "").trim() || null,
   };
 
   const supabase = await createClient();
