@@ -16,9 +16,39 @@ export async function createClient() {
   const cookieStore = await cookies();
   const token = cookieStore.get("sb-access-token")?.value;
 
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!url || !anonKey) {
+    console.error("Supabase environment variables are missing!");
+    const dummyClient = {
+      auth: {
+        getUser: async () => ({ data: { user: null }, error: { message: "Supabase URL or Anon Key is not configured." } }),
+        getSession: async () => ({ data: { session: null }, error: { message: "Supabase URL or Anon Key is not configured." } }),
+        signOut: async () => ({ error: { message: "Supabase URL or Anon Key is not configured." } }),
+      },
+      from: (table: string) => {
+        const chainable = {
+          select: () => chainable,
+          eq: () => chainable,
+          order: () => chainable,
+          limit: () => chainable,
+          single: () => Promise.resolve({ data: null, error: { message: "Supabase URL or Anon Key is not configured." } }),
+          maybeSingle: () => Promise.resolve({ data: null, error: { message: "Supabase URL or Anon Key is not configured." } }),
+          insert: () => chainable,
+          update: () => chainable,
+          upsert: () => chainable,
+          then: (cb: any) => cb({ data: null, error: { message: "Supabase URL or Anon Key is not configured." } }),
+        };
+        return chainable;
+      }
+    };
+    return dummyClient as any;
+  }
+
   const client = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    url,
+    anonKey,
     {
       cookies: {
         getAll() {
