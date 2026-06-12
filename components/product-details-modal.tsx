@@ -78,23 +78,23 @@ export function ProductDetailsModal({
     <div className="fixed inset-0 z-50 grid place-items-center bg-black/45 p-4 backdrop-blur-sm overflow-y-auto">
       <section className="w-full max-w-md my-8 overflow-hidden rounded-2xl bg-white shadow-2xl border border-gray-100 flex flex-col">
         {/* Header Visual */}
-        <div
-          className="relative aspect-[16/9] flex-shrink-0"
-          style={{
-            background: `radial-gradient(circle at 28% 18%, rgba(255,255,255,0.78), transparent 26%), linear-gradient(150deg, ${product.hueA}, ${product.hueB})`,
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+        <div className="relative aspect-[16/9] flex-shrink-0 bg-gray-100 overflow-hidden">
+          <img
+            src={product.image || "/images/placeholder.png"}
+            alt={product.name}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
           <button
             type="button"
             onClick={onClose}
             aria-label="Close details"
-            className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/90 text-[#111827] hover:bg-white transition-colors duration-200"
+            className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/90 text-[#111827] hover:bg-white transition-colors duration-200 z-10"
           >
             <X size={16} />
           </button>
-          <div className="absolute bottom-3 left-4 right-4">
-            <p className="font-body text-[10px] font-extrabold uppercase tracking-[0.18em] text-white/75">
+          <div className="absolute bottom-3 left-4 right-4 z-10">
+            <p className="font-body text-[10px] font-extrabold uppercase tracking-[0.18em] text-white/85">
               {t("batchLabel")} {product.batch} - {product.pressed}
             </p>
             <h2 className="mt-1 truncate font-body text-xl font-extrabold text-white">

@@ -191,13 +191,23 @@ export function CartView({ settings }: CartViewProps) {
                 key={`${item.product.slug}-${item.selectedSize}`}
                 className="flex gap-4 p-4 rounded-xl border border-gray-200 bg-white shadow-xs"
               >
-                <div
-                  className="h-16 w-16 shrink-0 rounded-lg flex items-center justify-center text-white text-[10px] font-bold"
-                  style={{
-                    background: `linear-gradient(150deg, ${item.product.hueA}, ${item.product.hueB})`,
-                  }}
-                >
-                  🥥
+                <div className="h-16 w-16 shrink-0 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
+                  {item.product.image ? (
+                    <img
+                      src={item.product.image}
+                      alt={item.product.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div
+                      className="w-full h-full flex items-center justify-center text-white text-[10px] font-bold"
+                      style={{
+                        background: `linear-gradient(150deg, ${item.product.hueA}, ${item.product.hueB})`,
+                      }}
+                    >
+                      🥥
+                    </div>
+                  )}
                 </div>
 
                 <div className="min-w-0 flex-1">

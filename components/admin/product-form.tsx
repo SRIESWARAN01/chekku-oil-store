@@ -35,9 +35,9 @@ interface ProductFormProps {
 const INITIAL: ProductActionState = {};
 
 const labelCls =
-  "font-mono text-[10px] text-shell-husk uppercase tracking-wider block mb-1.5";
+  "font-body text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2";
 const inputCls =
-  "w-full bg-kernel border border-shell/20 focus:border-leaf focus:outline-none transition-colors px-3 py-2 text-sm text-ink font-body rounded-sm";
+  "w-full bg-white border border-gray-200 focus:border-leaf focus:ring-1 focus:ring-leaf focus:outline-none transition-all duration-200 px-4 py-2.5 text-sm text-gray-900 font-body rounded-xl shadow-xs placeholder-gray-400/60";
 
 export function ProductForm({ product, categories }: ProductFormProps) {
   const [state, formAction, pending] = useActionState<ProductActionState, FormData>(
@@ -100,107 +100,125 @@ export function ProductForm({ product, categories }: ProductFormProps) {
   };
 
   return (
-    <form action={formAction} className="space-y-8">
+    <form action={formAction} className="space-y-6 max-w-4xl">
       {product?.id && <input type="hidden" name="id" value={product.id} />}
       <input type="hidden" name="hero_image" value={heroImageUrl} />
 
-      <div className="grid sm:grid-cols-2 gap-5">
-        <div>
-          <label className={labelCls}>Product name *</label>
-          <input
-            name="name"
-            required
-            defaultValue={product?.name ?? ""}
-            placeholder="Chekku Coconut Oil"
-            className={inputCls}
-          />
-        </div>
-        <div>
-          <label className={labelCls}>Slug (URL id) *</label>
-          <input
-            name="slug"
-            required
-            defaultValue={product?.slug ?? ""}
-            placeholder="chekku-coconut-oil"
-            className={inputCls}
-          />
-        </div>
-        <div>
-          <label className={labelCls}>Variant label *</label>
-          <input
-            name="variant_label"
-            required
-            defaultValue={product?.variant_label ?? ""}
-            placeholder="Wood-pressed"
-            className={inputCls}
-          />
-        </div>
-        <div>
-          <label className={labelCls}>Category</label>
-          <select
-            name="category_id"
-            defaultValue={product?.category_id ?? ""}
-            className={inputCls}
-          >
-            <option value="">— None —</option>
-            {categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
+      {/* CARD 1: Basic Information */}
+      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+        <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
+          Basic Details
+        </h3>
+        <div className="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label className={labelCls}>Product Name *</label>
+            <input
+              name="name"
+              required
+              defaultValue={product?.name ?? ""}
+              placeholder="Chekku Coconut Oil"
+              className={inputCls}
+            />
+          </div>
+          <div>
+            <label className={labelCls}>Slug (URL ID) *</label>
+            <input
+              name="slug"
+              required
+              defaultValue={product?.slug ?? ""}
+              placeholder="chekku-coconut-oil"
+              className={inputCls}
+            />
+          </div>
+          <div>
+            <label className={labelCls}>Variant Label *</label>
+            <input
+              name="variant_label"
+              required
+              defaultValue={product?.variant_label ?? ""}
+              placeholder="Wood-pressed"
+              className={inputCls}
+            />
+          </div>
+          <div>
+            <label className={labelCls}>Category</label>
+            <select
+              name="category_id"
+              defaultValue={product?.category_id ?? ""}
+              className={inputCls}
+            >
+              <option value="">— None —</option>
+              {categories.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
-      {/* Image Upload section */}
-      <div className="space-y-4 border border-shell/10 p-5 rounded-sm bg-kernel/5">
-        <span className={labelCls}>Product Image</span>
+      {/* CARD 2: Product Image & Assets */}
+      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+        <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
+          Product Image & Assets
+        </h3>
         
-        <div className="grid md:grid-cols-[160px_1fr] gap-5 items-start">
+        <div className="grid md:grid-cols-[200px_1fr] gap-6 items-center">
           {/* Image Preview */}
-          <div className="aspect-[4/3] w-full max-w-[160px] border border-shell/20 rounded-sm bg-kernel relative flex items-center justify-center overflow-hidden">
+          <div className="aspect-[4/3] w-full max-w-[200px] border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50/50 relative flex items-center justify-center overflow-hidden group hover:border-leaf/50 transition-colors">
             {heroImageUrl ? (
-              <img
-                src={heroImageUrl}
-                alt="Product preview"
-                className="w-full h-full object-cover"
-              />
+              <>
+                <img
+                  src={heroImageUrl}
+                  alt="Product preview"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <span className="text-white text-xs font-bold font-body">Change Image</span>
+                </div>
+              </>
             ) : (
-              <span className="font-mono text-[10px] text-shell-husk uppercase tracking-wider text-center px-2">
-                No Image
-              </span>
+              <div className="text-center p-4">
+                <svg className="mx-auto h-8 w-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span className="font-mono text-[9px] text-gray-400 uppercase tracking-wider block mt-2">
+                  No Image Selected
+                </span>
+              </div>
             )}
           </div>
 
           {/* Upload Controls */}
           <div className="space-y-4">
             <div>
-              <span className="font-mono text-[10px] text-shell-husk uppercase tracking-wider block mb-1.5">
-                Upload image file
+              <span className="font-body text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">
+                Upload New Image
               </span>
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleFileChange}
                 disabled={uploading}
-                className="block w-full text-xs font-mono text-shell
-                  file:mr-4 file:py-1.5 file:px-3
-                  file:rounded-sm file:border file:border-leaf
+                className="block w-full text-xs text-gray-500
+                  file:mr-4 file:py-2.5 file:px-4
+                  file:rounded-full file:border file:border-leaf
                   file:text-xs file:font-bold file:font-body
                   file:bg-transparent file:text-leaf
-                  hover:file:bg-leaf hover:file:text-kernel
-                  file:transition-colors file:cursor-pointer"
+                  hover:file:bg-leaf hover:file:text-white
+                  file:transition-all file:cursor-pointer disabled:opacity-50"
               />
             </div>
 
             <div className="relative flex py-1 items-center">
-              <div className="flex-grow border-t border-shell/10"></div>
-              <span className="flex-shrink mx-4 font-mono text-[10px] text-shell-husk uppercase tracking-wider">or</span>
-              <div className="flex-grow border-t border-shell/10"></div>
+              <div className="flex-grow border-t border-gray-100"></div>
+              <span className="flex-shrink mx-4 font-mono text-[10px] text-gray-400 uppercase tracking-wider">or</span>
+              <div className="flex-grow border-t border-gray-100"></div>
             </div>
 
             <div>
-              <span className="font-mono text-[10px] text-shell-husk uppercase tracking-wider block mb-1.5">
+              <span className="font-body text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">
                 Custom Image URL
               </span>
               <input
@@ -216,7 +234,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
             </div>
 
             {uploadStatus && (
-              <p className={`font-mono text-[10px] uppercase tracking-wider ${uploadStatus.includes("Error") ? "text-red-600" : "text-leaf"}`}>
+              <p className={`font-mono text-[10px] uppercase tracking-wider ${uploadStatus.includes("Error") ? "text-red-500" : "text-leaf"}`}>
                 {uploadStatus}
               </p>
             )}
@@ -228,7 +246,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
                   setHeroImageUrl("");
                   setUploadStatus(null);
                 }}
-                className="font-mono text-[10px] text-red-600 hover:text-red-800 uppercase tracking-wider underline block"
+                className="font-body text-xs text-red-500 hover:text-red-700 font-bold uppercase tracking-wider underline block transition-colors"
               >
                 Remove image
               </button>
@@ -237,179 +255,217 @@ export function ProductForm({ product, categories }: ProductFormProps) {
         </div>
       </div>
 
-      <div>
-        <label className={labelCls}>Tagline (shown on the card) *</label>
-        <textarea
-          name="tagline"
-          required
-          rows={2}
-          defaultValue={product?.tagline ?? ""}
-          placeholder="Slow-turned in a traditional wooden press…"
-          className={`${inputCls} resize-none`}
-        />
-      </div>
-
-      <div>
-        <label className={labelCls}>Description (shown in the details popup)</label>
-        <textarea
-          name="description"
-          rows={4}
-          defaultValue={product?.description ?? ""}
-          placeholder="Full description of the product…"
-          className={`${inputCls} resize-none`}
-        />
-      </div>
-
-      <div>
-        <label className={labelCls}>Key benefits — one per line</label>
-        <textarea
-          name="benefits"
-          rows={4}
-          defaultValue={(product?.benefits ?? []).join("\n")}
-          placeholder={"100% Raw & Unrefined\nTraditional Wood Press\nZero Added Preservatives"}
-          className={`${inputCls} resize-none`}
-        />
-      </div>
-
-      <div className="grid sm:grid-cols-3 gap-5">
-        <div>
-          <label className={labelCls}>Batch number *</label>
-          <input
-            name="batch_no"
-            required
-            defaultValue={product?.batch_no ?? ""}
-            placeholder="042"
-            className={inputCls}
-          />
-        </div>
-        <div>
-          <label className={labelCls}>Pressed date *</label>
-          <input
-            name="pressed_at"
-            type="date"
-            required
-            defaultValue={product?.pressed_at ?? ""}
-            className={inputCls}
-          />
-        </div>
-        <div>
-          <label className={labelCls}>Origin</label>
-          <input
-            name="origin"
-            defaultValue={product?.origin ?? "Madurai"}
-            placeholder="Madurai"
-            className={inputCls}
-          />
-        </div>
-      </div>
-
-      <div className="grid sm:grid-cols-4 gap-5">
-        <div>
-          <label className={labelCls}>Starting price (₹) *</label>
-          <input
-            name="starting_from_inr"
-            type="number"
-            min="0"
-            step="1"
-            required
-            defaultValue={product?.starting_from_inr ?? ""}
-            placeholder="320"
-            className={inputCls}
-          />
-        </div>
-        <div>
-          <label className={labelCls}>Rating (0–5, optional)</label>
-          <input
-            name="rating"
-            type="number"
-            min="0"
-            max="5"
-            step="0.1"
-            defaultValue={product?.rating ?? ""}
-            placeholder="4.9"
-            className={inputCls}
-          />
-        </div>
-        <div>
-          <label className={labelCls}>Brand</label>
-          <input
-            name="brand"
-            defaultValue={product?.brand ?? "Thennaiyan"}
-            placeholder="Thennaiyan"
-            className={inputCls}
-          />
-        </div>
-        <div>
-          <label className={labelCls}>Sort position</label>
-          <input
-            name="position"
-            type="number"
-            step="1"
-            defaultValue={product?.position ?? 0}
-            className={inputCls}
-          />
-        </div>
-      </div>
-
-      {/* Colour / bottle hue */}
-      <div>
-        <label className={labelCls}>Bottle gradient (card image colours)</label>
-        <div className="flex flex-wrap items-center gap-5">
-          <div className="flex items-center gap-2">
-            <input
-              type="color"
-              name="hue_a"
-              value={hueA}
-              onChange={(e) => setHueA(e.target.value)}
-              className="h-9 w-12 border border-shell/20 rounded-sm bg-kernel cursor-pointer"
+      {/* CARD 3: Description & Key Benefits */}
+      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+        <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
+          Description & Marketing Content
+        </h3>
+        <div className="space-y-5">
+          <div>
+            <label className={labelCls}>Tagline (shown on catalog card) *</label>
+            <textarea
+              name="tagline"
+              required
+              rows={2}
+              defaultValue={product?.tagline ?? ""}
+              placeholder="Slow-turned in a traditional wooden press…"
+              className={`${inputCls} resize-none`}
             />
-            <span className="font-mono text-xs text-shell">{hueA}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <input
-              type="color"
-              name="hue_b"
-              value={hueB}
-              onChange={(e) => setHueB(e.target.value)}
-              className="h-9 w-12 border border-shell/20 rounded-sm bg-kernel cursor-pointer"
+
+          <div>
+            <label className={labelCls}>Description (shown in product details popup)</label>
+            <textarea
+              name="description"
+              rows={4}
+              defaultValue={product?.description ?? ""}
+              placeholder="Full description of the product and extraction method..."
+              className={`${inputCls} resize-none`}
             />
-            <span className="font-mono text-xs text-shell">{hueB}</span>
           </div>
-          <div
-            className="h-12 w-24 border hairline rounded-sm"
-            style={{
-              background: `linear-gradient(160deg, ${hueA} 0%, ${hueB} 100%)`,
-            }}
-            aria-hidden
-          />
+
+          <div>
+            <label className={labelCls}>Key Benefits (one per line)</label>
+            <textarea
+              name="benefits"
+              rows={4}
+              defaultValue={(product?.benefits ?? []).join("\n")}
+              placeholder={"100% Raw & Unrefined\nTraditional Wood Press\nZero Added Preservatives"}
+              className={`${inputCls} resize-none`}
+            />
+          </div>
         </div>
       </div>
 
-      <label className="flex items-center gap-3 font-body text-sm text-ink">
-        <input
-          type="checkbox"
-          name="is_active"
-          defaultChecked={product ? product.is_active : true}
-          className="h-4 w-4 accent-leaf"
-        />
-        Active (visible on the storefront)
-      </label>
+      {/* CARD 4: Pricing, Branding & Sorting */}
+      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+        <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
+          Pricing, Branding & Sorting
+        </h3>
+        <div className="grid sm:grid-cols-4 gap-5">
+          <div>
+            <label className={labelCls}>Starting Price (₹) *</label>
+            <input
+              name="starting_from_inr"
+              type="number"
+              min="0"
+              step="1"
+              required
+              defaultValue={product?.starting_from_inr ?? ""}
+              placeholder="320"
+              className={inputCls}
+            />
+          </div>
+          <div>
+            <label className={labelCls}>Rating (0–5, optional)</label>
+            <input
+              name="rating"
+              type="number"
+              min="0"
+              max="5"
+              step="0.1"
+              defaultValue={product?.rating ?? ""}
+              placeholder="4.9"
+              className={inputCls}
+            />
+          </div>
+          <div>
+            <label className={labelCls}>Brand</label>
+            <input
+              name="brand"
+              defaultValue={product?.brand ?? "Thennaiyan"}
+              placeholder="Thennaiyan"
+              className={inputCls}
+            />
+          </div>
+          <div>
+            <label className={labelCls}>Sort Position</label>
+            <input
+              name="position"
+              type="number"
+              step="1"
+              defaultValue={product?.position ?? 0}
+              className={inputCls}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* CARD 5: Production Details & Hues */}
+      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+        <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
+          Manufacturing Details & Visual Hues
+        </h3>
+        <div className="grid sm:grid-cols-3 gap-5">
+          <div>
+            <label className={labelCls}>Batch Number *</label>
+            <input
+              name="batch_no"
+              required
+              defaultValue={product?.batch_no ?? ""}
+              placeholder="042"
+              className={inputCls}
+            />
+          </div>
+          <div>
+            <label className={labelCls}>Pressed Date *</label>
+            <input
+              name="pressed_at"
+              type="date"
+              required
+              defaultValue={product?.pressed_at ?? ""}
+              className={inputCls}
+            />
+          </div>
+          <div>
+            <label className={labelCls}>Origin</label>
+            <input
+              name="origin"
+              defaultValue={product?.origin ?? "Madurai"}
+              placeholder="Madurai"
+              className={inputCls}
+            />
+          </div>
+        </div>
+
+        {/* Colour / bottle hue picker */}
+        <div className="pt-4 border-t border-gray-100">
+          <label className={labelCls}>Gradient Palette (Used for Fallbacks & Dashboard Visuals)</label>
+          <div className="flex flex-wrap items-center gap-6 mt-2">
+            <div className="flex items-center gap-3">
+              <input
+                type="color"
+                name="hue_a"
+                value={hueA}
+                onChange={(e) => setHueA(e.target.value)}
+                className="h-10 w-14 border border-gray-200 rounded-lg cursor-pointer bg-transparent"
+              />
+              <span className="font-mono text-xs text-gray-500 font-bold">{hueA}</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <input
+                type="color"
+                name="hue_b"
+                value={hueB}
+                onChange={(e) => setHueB(e.target.value)}
+                className="h-10 w-14 border border-gray-200 rounded-lg cursor-pointer bg-transparent"
+              />
+              <span className="font-mono text-xs text-gray-500 font-bold">{hueB}</span>
+            </div>
+            <div className="flex items-center gap-3 ml-2">
+              <span className="text-xs text-gray-400 font-bold font-body">Preview:</span>
+              <div
+                className="h-10 w-24 border border-gray-100 rounded-xl shadow-xs"
+                style={{
+                  background: `linear-gradient(160deg, ${hueA} 0%, ${hueB} 100%)`,
+                }}
+                aria-hidden
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Active Checkbox Card */}
+      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between">
+        <div>
+          <h4 className="font-display text-sm font-bold text-gray-800">
+            Publish Status
+          </h4>
+          <p className="text-xs text-gray-400 font-semibold font-body mt-0.5">
+            Decide if this product should be visible on the public storefront.
+          </p>
+        </div>
+        <label className="relative inline-flex items-center cursor-pointer select-none">
+          <input
+            type="checkbox"
+            name="is_active"
+            defaultChecked={product ? product.is_active : true}
+            className="sr-only peer"
+          />
+          <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-leaf"></div>
+        </label>
+      </div>
 
       {state?.error && (
-        <p className="font-body text-sm text-red-700 bg-red-50 border border-red-200 px-3 py-2 rounded-sm">
+        <p className="font-body text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-3 rounded-2xl">
           {state.error}
         </p>
       )}
 
-      <div className="flex items-center gap-3 pt-2 border-t hairline">
+      {/* Form Buttons */}
+      <div className="flex items-center gap-4 pt-4">
         <button
           type="submit"
           disabled={pending}
-          className="btn-primary mt-6 disabled:opacity-60 disabled:cursor-not-allowed"
+          className="px-6 py-3 rounded-full bg-leaf hover:bg-leaf-deep text-white font-body text-sm font-bold transition-all duration-200 shadow-md select-none disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          {pending ? "Saving…" : product?.id ? "Save changes" : "Create product"}
+          {pending ? "Saving…" : product?.id ? "Save Changes" : "Create Product"}
         </button>
-        <Link href="/admin/products" className="btn-secondary mt-6">
+        <Link 
+          href="/admin/products" 
+          className="px-6 py-3 rounded-full border border-gray-200 hover:bg-gray-50 text-gray-500 font-body text-sm font-bold transition-all duration-200 select-none"
+        >
           Cancel
         </Link>
       </div>

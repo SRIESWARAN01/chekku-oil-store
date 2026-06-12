@@ -315,11 +315,20 @@ export function AccountDashboard({
                   key={product.slug}
                   className="border border-gray-100 rounded-xl overflow-hidden hover:shadow-md transition-all flex flex-col"
                 >
-                  <div
-                    className="h-32 flex items-center justify-center p-4"
-                    style={{ background: `linear-gradient(135deg, ${product.hueA}10, ${product.hueB}20)` }}
-                  >
-                    <span className="font-display text-xs font-bold text-[#1f6b3b] bg-white px-2.5 py-1 rounded-full shadow-sm">
+                  <div className="h-32 relative overflow-hidden bg-gray-50 flex items-center justify-center">
+                    {product.image ? (
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div
+                        className="w-full h-full"
+                        style={{ background: `linear-gradient(135deg, ${product.hueA}10, ${product.hueB}20)` }}
+                      />
+                    )}
+                    <span className="absolute bottom-2 left-2 font-display text-[10px] font-bold text-[#1f6b3b] bg-white/90 backdrop-blur-xs px-2.5 py-1 rounded-full shadow-sm uppercase tracking-wider">
                       {product.variant}
                     </span>
                   </div>
