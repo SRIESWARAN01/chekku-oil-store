@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, JetBrains_Mono, Manrope } from "next/font/google";
 import { LanguageProvider } from "@/lib/language-context";
 import { MobileNav } from "@/components/mobile-nav";
+import { IntroAnimation } from "@/components/intro-animation";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -41,7 +42,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
-}: {
+  }: {
   children: React.ReactNode;
 }) {
   return (
@@ -51,6 +52,7 @@ export default function RootLayout({
     >
       <body>
         <LanguageProvider>
+          <IntroAnimation />
           {children}
           <MobileNav />
         </LanguageProvider>
