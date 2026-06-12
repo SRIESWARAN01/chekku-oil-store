@@ -14,6 +14,7 @@ import {
 import type { ProductCardData } from "./product-card";
 import { useLanguage } from "@/lib/language-context";
 import { useCartStore } from "@/lib/cart-store";
+import { useToastStore } from "@/lib/toast-store";
 import { cn } from "@/lib/utils";
 
 interface ProductDetailsModalProps {
@@ -36,7 +37,9 @@ export function ProductDetailsModal({
   const { t, lang } = useLanguage();
   const router = useRouter();
   const addItem = useCartStore((state) => state.addItem);
+  const { addToast } = useToastStore();
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
+  const [addingState, setAddingState] = useState<"idle" | "adding" | "added">("idle");
 
   if (!isOpen || !product) return null;
 
@@ -66,9 +69,22 @@ export function ProductDetailsModal({
 
   // Handle Add to Cart action
   const handleAddToCart = () => {
+    if (addingState !== "idle") return;
+
+    setAddingState("adding");
     addItem(product, 1, activeSize, activePrice);
-    onClose();
-    router.push("/cart");
+    addToast(lang === "ta"
+      ? `${product.name} (${activeSize}) கார்ட்டில் சேர்க்கப்பட்டது!`
+      : `Added ${product.name} (${activeSize}) to cart!`
+    );
+
+    setTimeout(() => {
+      setAddingState("added");
+      setTimeout(() => {
+        setAddingState("idle");
+        onClose();
+      }, 1000);
+    }, 600);
   };
 
   // Determine batch-specific lab report values based on product slug
@@ -237,10 +253,37 @@ export function ProductDetailsModal({
               <button
                 type="button"
                 onClick={handleAddToCart}
-                className="w-full flex h-11 items-center justify-center gap-2 rounded-full bg-[#1f6b3b] hover:bg-[#154b29] text-white font-body text-xs font-extrabold transition-all duration-200 shadow-md select-none"
+                disabled={addingState !== "idle"}
+                className={cn(
+                  "w-full flex h-11 items-center justify-center gap-2 rounded-full font-body text-xs font-extrabold transition-all duration-300 shadow-md select-none",
+                  addingState === "idle" && "bg-[#1f6b3b] hover:bg-[#154b29] text-white",
+                  addingState === "adding" && "bg-[#1f6b3b]/80 text-white/95 scale-95 cursor-not-allowed",
+                  addingState === "added" && "bg-emerald-600 hover:bg-emerald-700 text-white"
+                )}
               >
-                <ShoppingCart size={15} />
-                <span>Add to Cart</span>
+                {addingState === "idle" && (
+                  <>
+                    <ShoppingCart size={15} />
+                    <span>Add to Cart</span>
+                  </>
+                )}
+                {addingState === "adding" && (
+                  <>
+                    <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    <span>Adding...</span>
+                  </>
+                )}
+                {addingState === "added" && (
+                  <>
+                    <svg className="h-4 w-4 text-white animate-bounce" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                    <span>Added!</span>
+                  </>
+                )}
               </button>
             ) : (
               <button

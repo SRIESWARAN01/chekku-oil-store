@@ -176,3 +176,35 @@
   animation: overlay-exit 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+@keyframes toast-slide-in {
+  0% {
+    transform: translateY(-1rem) scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-badge {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-slide-in {
+  animation: toast-slide-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pulse-badge {
+  animation: pulse-badge 0.3s ease-in-out;
+}
+
+

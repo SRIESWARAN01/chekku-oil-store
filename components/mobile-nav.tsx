@@ -4,10 +4,29 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, ShoppingBag, ShoppingCart, User } from "lucide-react";
 import { useLanguage } from "@/lib/language-context";
+import { useCartStore } from "@/lib/cart-store";
+import { useEffect, useState } from "react";
 
 export function MobileNav() {
   const pathname = usePathname();
   const { t } = useLanguage();
+  const items = useCartStore((state) => state.items);
+  const [mounted, setMounted] = useState(false);
+  const [animate, setAnimate] = useState(false);
+
+  const cartCount = mounted ? items.reduce((sum, item) => sum + item.quantity, 0) : 0;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (cartCount > 0) {
+      setAnimate(true);
+      const timer = setTimeout(() => setAnimate(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [cartCount]);
 
   // Hide mobile nav in admin portal
   if (pathname?.startsWith("/admin")) {
@@ -51,7 +70,14 @@ export function MobileNav() {
                 isActive ? "text-[#1f6b3b]" : "text-gray-400 hover:text-gray-600"
               }`}
             >
-              <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+              <div className="relative">
+                <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+                {item.label === "Cart" && cartCount > 0 && (
+                  <span className={`absolute -top-1.5 -right-2 bg-[#217743] text-white text-[8px] font-extrabold h-3.5 w-3.5 rounded-full flex items-center justify-center border border-white ${animate ? "animate-pulse-badge" : ""}`}>
+                    {cartCount}
+                  </span>
+                )}
+              </div>
               <span className="text-[10px] font-bold tracking-wide uppercase">
                 {item.label}
               </span>

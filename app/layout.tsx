@@ -3,6 +3,7 @@ import { Fraunces, JetBrains_Mono, Manrope } from "next/font/google";
 import { LanguageProvider } from "@/lib/language-context";
 import { MobileNav } from "@/components/mobile-nav";
 import { IntroAnimation } from "@/components/intro-animation";
+import { Toaster } from "@/components/toaster";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -53,6 +54,7 @@ export default function RootLayout({
       <body>
         <LanguageProvider>
           <IntroAnimation />
+          <Toaster />
           {children}
           <MobileNav />
         </LanguageProvider>

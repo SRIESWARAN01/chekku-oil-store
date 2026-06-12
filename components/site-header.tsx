@@ -4,9 +4,28 @@ import Link from "next/link";
 import { ShoppingCart, QrCode, History, User } from "lucide-react";
 import { useLanguage } from "@/lib/language-context";
 import { LanguageToggle } from "./language-toggle";
+import { useCartStore } from "@/lib/cart-store";
+import { useEffect, useState } from "react";
 
 export function SiteHeader() {
   const { t } = useLanguage();
+  const items = useCartStore((state) => state.items);
+  const [mounted, setMounted] = useState(false);
+  const [animate, setAnimate] = useState(false);
+
+  const cartCount = mounted ? items.reduce((sum, item) => sum + item.quantity, 0) : 0;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (cartCount > 0) {
+      setAnimate(true);
+      const timer = setTimeout(() => setAnimate(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [cartCount]);
 
   return (
     <header className="border-b border-gray-100 bg-white sticky top-0 z-40">
@@ -51,6 +70,11 @@ export function SiteHeader() {
             className="p-2 hover:bg-gray-50 rounded-full transition-colors relative"
           >
             <ShoppingCart size={20} strokeWidth={2} />
+            {cartCount > 0 && (
+              <span className={`absolute -top-0.5 -right-0.5 bg-[#217743] text-white text-[9px] font-extrabold h-4 w-4 rounded-full flex items-center justify-center border border-white ${animate ? "animate-pulse-badge" : ""}`}>
+                {cartCount}
+              </span>
+            )}
           </Link>
           <button
             aria-label={t("scanQR")}

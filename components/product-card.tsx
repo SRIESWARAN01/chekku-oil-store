@@ -6,6 +6,7 @@ import { Heart, Star, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/lib/language-context";
 import { useCartStore } from "@/lib/cart-store";
+import { useToastStore } from "@/lib/toast-store";
 
 export interface ProductVariantData {
   id: string;
@@ -55,6 +56,8 @@ export function ProductCard({
   const addItem = useCartStore((state) => state.addItem);
   const [isFavorite, setIsFavorite] = useState(false);
   const { t, lang, translateProduct } = useLanguage();
+  const [addingState, setAddingState] = useState<"idle" | "adding" | "added">("idle");
+  const { addToast } = useToastStore();
 
   const localized = translateProduct(data.slug, data);
 
@@ -151,15 +154,54 @@ export function ProductCard({
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
+              if (addingState !== "idle") return;
+
               const size = data.variants?.[0]?.sizeLabel || "1L";
               const price = data.variants?.[0]?.priceInr || data.startingFrom;
+              
+              setAddingState("adding");
               addItem(data, 1, size, price);
-              router.push("/cart");
+              addToast(lang === "ta"
+                ? `${localized.name} (${size}) கார்ட்டில் சேர்க்கப்பட்டது!`
+                : `Added ${localized.name} (${size}) to cart!`
+              );
+
+              setTimeout(() => {
+                setAddingState("added");
+                setTimeout(() => {
+                  setAddingState("idle");
+                }, 1200);
+              }, 600);
             }}
-            className="btn-primary !px-2.5 !py-2 !text-xs rounded-full flex items-center justify-center gap-1.5 hover:opacity-95"
+            className={cn(
+              "btn-primary !px-2.5 !py-2 !text-xs rounded-full flex items-center justify-center gap-1.5 transition-all duration-300 w-full",
+              addingState === "adding" && "opacity-80 scale-95",
+              addingState === "added" && "bg-emerald-600 hover:bg-emerald-700 border-emerald-600"
+            )}
           >
-            <ShoppingCart size={13} strokeWidth={2.5} />
-            <span>{t("add")}</span>
+            {addingState === "idle" && (
+              <>
+                <ShoppingCart size={13} strokeWidth={2.5} />
+                <span>{t("add")}</span>
+              </>
+            )}
+            {addingState === "adding" && (
+              <>
+                <svg className="animate-spin h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                </svg>
+                <span>Adding...</span>
+              </>
+            )}
+            {addingState === "added" && (
+              <>
+                <svg className="h-3.5 w-3.5 text-white animate-bounce" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                <span>Added!</span>
+              </>
+            )}
           </button>
 
           <button
