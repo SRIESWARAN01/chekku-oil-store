@@ -1,8 +1,20 @@
 "use client";
 
-import { Check, MessageCircle, X, Award, ShieldAlert, FlaskConical } from "lucide-react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { 
+  Check, 
+  MessageCircle, 
+  X, 
+  Award, 
+  ShieldAlert, 
+  FlaskConical, 
+  ShoppingCart 
+} from "lucide-react";
 import type { ProductCardData } from "./product-card";
 import { useLanguage } from "@/lib/language-context";
+import { useCartStore } from "@/lib/cart-store";
+import { cn } from "@/lib/utils";
 
 interface ProductDetailsModalProps {
   isOpen: boolean;
@@ -22,22 +34,45 @@ export function ProductDetailsModal({
   brand = "Thennaiyan",
 }: ProductDetailsModalProps) {
   const { t, lang } = useLanguage();
+  const router = useRouter();
+  const addItem = useCartStore((state) => state.addItem);
+  const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
 
   if (!isOpen || !product) return null;
 
   const displayBrand = lang === "ta" ? t("brand") : brand;
 
+  // Selected variant details
+  const variantsList = product.variants && product.variants.length > 0 ? product.variants : [];
+  const hasVariants = variantsList.length > 0;
+  const activeVariant = hasVariants ? variantsList[selectedVariantIndex] : null;
+
+  const activeSize = activeVariant ? activeVariant.sizeLabel : "1L";
+  const activePrice = activeVariant ? activeVariant.priceInr : product.startingFrom;
+  const activeStock = activeVariant ? activeVariant.stock : (product.inStock ? 99 : 0);
+
+  // Generate dynamic sharing link for the product in the WhatsApp message
+  const productLink = typeof window !== "undefined"
+    ? `${window.location.origin}/shop?product=${product.slug}`
+    : `https://chekku-oil-store.vercel.app/shop?product=${product.slug}`;
+
   const whatsappText = lang === "ta"
-    ? `வணக்கம், நான் *${product.name}* ஆர்டர் செய்ய விரும்புகிறேன் (${product.variant}) - ${displayBrand}.\nதொகுதி: ${product.batch}\nஆட்டப்பட்டது: ${product.pressed}\nவிலை: ₹${product.startingFrom}`
-    : `Hi, I want to order ${product.name} (${product.variant}) from ${displayBrand}.\nBatch: ${product.batch}\nPressed: ${product.pressed}\nStarting Price: ${INR}${product.startingFrom}`;
+    ? `வணக்கம், நான் *${product.name}* ஆர்டர் செய்ய விரும்புகிறேன் (${product.variant} - ${activeSize}) - ${displayBrand}.\nதொகுதி: ${product.batch}\nஆட்டப்பட்டது: ${product.pressed}\nவிலை: ₹${activePrice}\nதயாரிப்பு விவரம்: ${productLink}`
+    : `Hi, I want to order ${product.name} (${product.variant} - ${activeSize}) from ${displayBrand}.\nBatch: ${product.batch}\nPressed: ${product.pressed}\nPrice: ${INR}${activePrice}\nProduct Link: ${productLink}`;
 
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
     whatsappText
   )}`;
 
+  // Handle Add to Cart action
+  const handleAddToCart = () => {
+    addItem(product, 1, activeSize, activePrice);
+    onClose();
+    router.push("/cart");
+  };
+
   // Determine batch-specific lab report values based on product slug
   const isVirgin = product.slug.includes("virgin");
-  const isHair = product.slug.includes("hair");
 
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-black/45 p-4 backdrop-blur-sm overflow-y-auto">
@@ -77,13 +112,50 @@ export function ProductDetailsModal({
               </p>
               <p className="mt-1 font-body text-2xl font-extrabold text-leaf">
                 {INR}
-                {product.startingFrom.toFixed(2)}
+                {activePrice.toFixed(2)}
               </p>
             </div>
-            <span className="rounded-full bg-leaf-mist px-3 py-1 font-body text-[10px] font-extrabold uppercase tracking-wide text-leaf border border-leaf/10">
-              {t("naturalBadge")}
-            </span>
+            <div className="text-right">
+              <span className="rounded-full bg-leaf-mist px-3 py-1 font-body text-[10px] font-extrabold uppercase tracking-wide text-leaf border border-leaf/10">
+                {t("naturalBadge")}
+              </span>
+              <div className="mt-1 text-[10px] font-bold font-mono">
+                {activeStock > 0 ? (
+                  <span className="text-leaf">● In Stock</span>
+                ) : (
+                  <span className="text-red-500">○ Out of Stock</span>
+                )}
+              </div>
+            </div>
           </div>
+
+          {/* Size Variant Selector */}
+          {hasVariants && (
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+                Select Size
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {variantsList.map((v, idx) => (
+                  <button
+                    key={v.id || v.sizeLabel}
+                    type="button"
+                    onClick={() => setSelectedVariantIndex(idx)}
+                    className={cn(
+                      "px-4 py-2 text-xs font-bold font-body rounded-full border transition-all select-none",
+                      v.stock === 0
+                        ? "border-gray-200 bg-gray-50 text-gray-300 cursor-not-allowed line-through"
+                        : selectedVariantIndex === idx
+                        ? "border-leaf bg-leaf text-white"
+                        : "border-gray-200 bg-white text-gray-600 hover:border-leaf/40"
+                    )}
+                  >
+                    {v.sizeLabel} - {INR}{v.priceInr}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           <p className="font-body text-sm font-semibold leading-relaxed text-gray-600 bg-gray-50/50 border border-gray-100 p-3 rounded-xl">
             {product.description || product.tagline}
@@ -160,23 +232,43 @@ export function ProductDetailsModal({
           </div>
 
           {/* Form Actions */}
-          <div className="grid grid-cols-[0.8fr_1.2fr] gap-2 pt-1">
-            <button
-              type="button"
-              onClick={onClose}
-              className="h-11 rounded-full border border-leaf text-leaf font-body text-xs font-extrabold hover:bg-leaf/5 transition-all duration-200"
-            >
-              {t("close")}
-            </button>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-leaf text-white font-body text-xs font-extrabold hover:bg-leaf-deep transition-all duration-200 shadow-md"
-            >
-              <MessageCircle size={15} />
-              <span>{t("whatsappBtn")}</span>
-            </a>
+          <div className="space-y-2.5 pt-1">
+            {activeStock > 0 ? (
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                className="w-full flex h-11 items-center justify-center gap-2 rounded-full bg-[#1f6b3b] hover:bg-[#154b29] text-white font-body text-xs font-extrabold transition-all duration-200 shadow-md select-none"
+              >
+                <ShoppingCart size={15} />
+                <span>Add to Cart</span>
+              </button>
+            ) : (
+              <button
+                disabled
+                className="w-full flex h-11 items-center justify-center gap-2 rounded-full bg-gray-200 text-gray-400 font-body text-xs font-extrabold cursor-not-allowed select-none"
+              >
+                <span>Out of Stock</span>
+              </button>
+            )}
+            
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={onClose}
+                className="h-10 rounded-full border border-gray-200 hover:bg-gray-50 text-gray-500 font-body text-xs font-bold transition-all duration-200 select-none"
+              >
+                Close
+              </button>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full border border-leaf text-leaf font-body text-xs font-bold hover:bg-leaf/5 transition-all duration-200 select-none"
+              >
+                <MessageCircle size={14} />
+                <span>WhatsApp Enquiry</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>

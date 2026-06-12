@@ -1,9 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Heart, Star, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/lib/language-context";
+import { useCartStore } from "@/lib/cart-store";
+
+export interface ProductVariantData {
+  id: string;
+  sizeLabel: string;
+  priceInr: number;
+  stock: number;
+}
 
 export interface ProductCardData {
   slug: string;
@@ -24,6 +33,7 @@ export interface ProductCardData {
   image?: string;
   brand?: string;
   inStock?: boolean;
+  variants?: ProductVariantData[];
 }
 
 interface ProductCardProps {
@@ -41,6 +51,8 @@ export function ProductCard({
   whatsappNumber = "918124165047",
   brand = "Thennaiyan",
 }: ProductCardProps) {
+  const router = useRouter();
+  const addItem = useCartStore((state) => state.addItem);
   const [isFavorite, setIsFavorite] = useState(false);
   const { t, lang, translateProduct } = useLanguage();
 
@@ -135,16 +147,20 @@ export function ProductCard({
 
         {/* Action buttons */}
         <div className="grid grid-cols-2 gap-2 pt-1">
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const size = data.variants?.[0]?.sizeLabel || "1L";
+              const price = data.variants?.[0]?.priceInr || data.startingFrom;
+              addItem(data, 1, size, price);
+              router.push("/cart");
+            }}
             className="btn-primary !px-2.5 !py-2 !text-xs rounded-full flex items-center justify-center gap-1.5 hover:opacity-95"
           >
             <ShoppingCart size={13} strokeWidth={2.5} />
             <span>{t("add")}</span>
-          </a>
+          </button>
 
           <button
             onClick={(e) => {

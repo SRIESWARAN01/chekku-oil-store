@@ -40,7 +40,7 @@ export interface ProductRow {
   categories?: { slug: string } | { slug: string }[] | null;
   is_veg?: boolean;
   is_best_seller?: boolean;
-  product_variants?: { price_inr: number; stock: number }[] | null;
+  product_variants?: { id: string; size_label: string; price_inr: number | string; stock: number }[] | null;
 }
 
 export interface JournalEntryView {
@@ -131,6 +131,15 @@ export function mapProductRowToCard(row: ProductRow): ProductCardData {
     ? row.product_variants!.some((v) => v.stock > 0)
     : true; // Default to true if no variants are created yet
 
+  const mappedVariants = row.product_variants
+    ? row.product_variants.map((v) => ({
+        id: v.id,
+        sizeLabel: v.size_label,
+        priceInr: Number(v.price_inr) || 0,
+        stock: v.stock || 0,
+      }))
+    : [];
+
   return {
     slug: row.slug,
     name: row.name,
@@ -150,6 +159,7 @@ export function mapProductRowToCard(row: ProductRow): ProductCardData {
     image: row.hero_image ?? undefined,
     brand: row.brand || "Thennaiyan",
     inStock,
+    variants: mappedVariants,
   };
 }
 
@@ -160,7 +170,7 @@ export async function getProducts(): Promise<ProductCardData[]> {
     const supabase = await createClient();
     const { data, error } = await supabase
       .from("products")
-      .select("*, categories(slug), product_variants(price_inr, stock)")
+      .select("*, categories(slug), product_variants(id, size_label, price_inr, stock)")
       .eq("is_active", true)
       .order("position", { ascending: true });
     if (error || !data) return [];

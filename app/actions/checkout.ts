@@ -161,3 +161,55 @@ export async function placeOrder(
   revalidatePath("/account/orders");
   return { orderId: order.id, orderNo: order.order_no, whatsappUrl };
 }
+
+export async function validateCouponAction(
+  code: string,
+  subtotal: number
+): Promise<{ success: boolean; discount?: number; error?: string; type?: string; value?: number }> {
+  try {
+    const supabase = await createClient();
+    const cleanCode = String(code ?? "").trim().toUpperCase();
+    
+    if (!cleanCode) return { success: false, error: "Please enter a coupon code." };
+
+    const { data: coupon, error } = await supabase
+      .from("coupons")
+      .select("id, discount_type, discount_value, min_order_inr, max_uses, used_count, valid_until")
+      .eq("code", cleanCode)
+      .eq("is_active", true)
+      .maybeSingle();
+
+    if (error || !coupon) {
+      return { success: false, error: "Invalid or inactive coupon code." };
+    }
+
+    if (coupon.valid_until && new Date(coupon.valid_until) < new Date()) {
+      return { success: false, error: "This coupon code has expired." };
+    }
+
+    if (coupon.max_uses !== null && coupon.used_count >= coupon.max_uses) {
+      return { success: false, error: "This coupon code has reached its usage limit." };
+    }
+
+    if (subtotal < coupon.min_order_inr) {
+      return { 
+        success: false, 
+        error: `Minimum order value of \u20B9${Number(coupon.min_order_inr).toFixed(2)} is required for this coupon.` 
+      };
+    }
+
+    const discountAmount = coupon.discount_type === "percent"
+      ? Math.round(subtotal * (Number(coupon.discount_value) / 100) * 100) / 100
+      : Math.min(Number(coupon.discount_value), subtotal);
+
+    return { 
+      success: true, 
+      discount: discountAmount,
+      type: coupon.discount_type,
+      value: Number(coupon.discount_value)
+    };
+  } catch (err: any) {
+    return { success: false, error: err.message || "Error validating coupon." };
+  }
+}
+
