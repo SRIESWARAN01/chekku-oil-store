@@ -22,6 +22,8 @@ export interface ProductCardData {
   isVeg?: boolean;
   isBestSeller?: boolean;
   image?: string;
+  brand?: string;
+  inStock?: boolean;
 }
 
 interface ProductCardProps {

@@ -18,6 +18,7 @@ export interface ProductFormProduct {
   origin: string;
   starting_from_inr: number | string;
   rating: number | string | null;
+  brand?: string | null;
   benefits: string[] | null;
   hue_a: string;
   hue_b: string;
@@ -302,7 +303,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-3 gap-5">
+      <div className="grid sm:grid-cols-4 gap-5">
         <div>
           <label className={labelCls}>Starting price (₹) *</label>
           <input
@@ -326,6 +327,15 @@ export function ProductForm({ product, categories }: ProductFormProps) {
             step="0.1"
             defaultValue={product?.rating ?? ""}
             placeholder="4.9"
+            className={inputCls}
+          />
+        </div>
+        <div>
+          <label className={labelCls}>Brand</label>
+          <input
+            name="brand"
+            defaultValue={product?.brand ?? "Thennaiyan"}
+            placeholder="Thennaiyan"
             className={inputCls}
           />
         </div>

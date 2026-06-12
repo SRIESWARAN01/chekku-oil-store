@@ -12,6 +12,7 @@ import {
   BarChart3,
   ShoppingCart,
   Ticket,
+  Folder,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { signOut } from "@/app/actions/auth";
@@ -20,6 +21,7 @@ const LINKS = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },
   { href: "/admin/products", label: "Products", icon: Package },
+  { href: "/admin/categories", label: "Categories", icon: Folder },
   { href: "/admin/orders", label: "Orders", icon: ShoppingCart },
   { href: "/admin/coupons", label: "Coupons", icon: Ticket },
   { href: "/admin/journal", label: "Journal", icon: BookText },
