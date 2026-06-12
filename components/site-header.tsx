@@ -36,7 +36,7 @@ export function SiteHeader() {
             <img
               src="/logo.png"
               alt={t("brand")}
-              className="h-9 w-9 rounded-full border border-leaf/10 object-cover"
+              className="h-9 w-9 border border-leaf/10 object-contain"
             />
             <span className="font-body font-bold text-lg text-ink tracking-tight">
               {t("brand")}

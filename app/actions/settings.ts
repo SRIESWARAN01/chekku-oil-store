@@ -49,6 +49,8 @@ export async function saveSettings(
     ).trim(),
     address: String(formData.get("address") ?? "").trim(),
     hero_banner_image: String(formData.get("hero_banner_image") ?? "").trim() || null,
+    hero_title: String(formData.get("hero_title") ?? "").trim() || null,
+    hero_subtitle: String(formData.get("hero_subtitle") ?? "").trim() || null,
   };
 
   const supabase = await createClient();

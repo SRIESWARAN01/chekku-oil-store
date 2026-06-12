@@ -210,22 +210,69 @@ export default async function StoryPage() {
 
         {/* Mission & Vision */}
         <section className="py-20 lg:py-24 bg-kernel border-b hairline">
-          <div className="container max-w-4xl">
-            <span className="eyebrow text-oil">Purpose & Values</span>
-            <div className="grid md:grid-cols-2 gap-12 mt-8">
+          <div className="container max-w-4xl space-y-16">
+            
+            {/* Mission & Vision Grid */}
+            <div className="grid md:grid-cols-2 gap-12">
               <div className="space-y-4">
+                <span className="eyebrow text-oil">Our Purpose</span>
                 <h3 className="font-display text-2xl text-leaf-deep font-bold" style={{ fontVariationSettings: "'SOFT' 50, 'opsz' 24" }}>Our Mission</h3>
                 <p className="font-body text-sm lg:text-base text-shell leading-relaxed">
                   To revive and preserve the age-old tradition of wood-pressed (Chekku) oil extraction, ensuring households across India have access to 100% pure, unrefined, and chemical-free coconut oils that promote healthy living and culinary authenticity.
                 </p>
               </div>
               <div className="space-y-4">
+                <span className="eyebrow text-oil">Our Horizon</span>
                 <h3 className="font-display text-2xl text-leaf-deep font-bold" style={{ fontVariationSettings: "'SOFT' 50, 'opsz' 24" }}>Our Vision</h3>
                 <p className="font-body text-sm lg:text-base text-shell leading-relaxed">
                   To become the nation's most trusted brand for natural coconut products, empowering local farming communities in Madurai and establishing traditional cold-press techniques as the gold standard for pure cooking oils globally.
                 </p>
               </div>
             </div>
+
+            {/* Sustainability Statement */}
+            <div className="pt-12 border-t border-shell/10 space-y-4">
+              <span className="eyebrow text-leaf">Coconet Solutions</span>
+              <h3 className="font-display text-3xl text-[#1f6b3b] font-extrabold" style={{ fontVariationSettings: "'SOFT' 50, 'opsz' 24" }}>
+                Empowering a Sustainable Future
+              </h3>
+              <p className="font-body text-sm lg:text-base text-shell leading-relaxed">
+                At Coconet, we're revolutionizing how natural resources can power innovation. Our eco-friendly coconut-based products are crafted to deliver exceptional performance while protecting the planet. Whether it's for agriculture, construction, erosion control, or lifestyle needs, our solutions blend nature’s power with cutting-edge sustainability. Join us in building a cleaner, greener world—one coconut at a time.
+              </p>
+            </div>
+
+            {/* Work Process */}
+            <div className="pt-12 border-t border-shell/10 space-y-4">
+              <span className="eyebrow text-oil">About Our Work Process</span>
+              <h3 className="font-display text-3xl text-leaf-deep font-extrabold" style={{ fontVariationSettings: "'SOFT' 50, 'opsz' 24" }}>
+                How We Operate
+              </h3>
+              <p className="font-body text-sm lg:text-base text-shell leading-relaxed">
+                At Thennaiyan Company, we specialize in delivering premium-quality coconuts and coconut-based products to global markets. With years of experience in the coconut industry, we are committed to providing fresh, organic, and carefully selected coconuts that meet international export standards.
+              </p>
+              <p className="font-body text-sm lg:text-base text-shell leading-relaxed">
+                Our products are sourced directly from trusted farms, ensuring natural taste, rich nutrients, and eco-friendly processing. We export a wide variety of coconut products, including fresh coconuts, tender coconuts, desiccated coconut, coconut oil, and coir products to countries worldwide.
+              </p>
+              <p className="font-body text-sm lg:text-base text-shell leading-relaxed">
+                With a focus on quality, timely delivery, and customer satisfaction, Thennaiyan Company has earned a reputation as a reliable coconut exporter, building strong and long-lasting relationships with clients across the globe.
+              </p>
+            </div>
+
+            {/* Leadership Profile */}
+            <div className="pt-12 border-t border-shell/10 space-y-4">
+              <span className="eyebrow text-leaf">Leadership</span>
+              <h3 className="font-display text-3xl text-leaf-deep font-extrabold" style={{ fontVariationSettings: "'SOFT' 50, 'opsz' 24" }}>
+                Managing Director's Profile
+              </h3>
+              <div className="bg-gray-50 border border-gray-100 p-6 rounded-2xl space-y-2">
+                <p className="font-display text-xl font-bold text-ink">Mr. Tamil Arashan</p>
+                <p className="font-mono text-xs text-leaf font-bold uppercase tracking-wider">Managing Director</p>
+                <p className="font-body text-sm text-shell leading-relaxed mt-2">
+                  Completing his BBA in May 2025, Mr. Tamil Arashan established his own export venture, <strong>Thennaiyan Export</strong>, in July 2025. Guided by his leadership, the company integrates traditional values with modern export standards to offer outstanding sustainable solutions to worldwide clients.
+                </p>
+              </div>
+            </div>
+
           </div>
         </section>
 

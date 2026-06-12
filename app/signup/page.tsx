@@ -24,7 +24,7 @@ export default async function SignupPage({
             <img
               src="/logo.png"
               alt="Thennaiyan"
-              className="mx-auto h-16 w-16 rounded-full object-cover border-2 border-white/20"
+              className="mx-auto h-16 w-16 object-contain border-2 border-white/20"
             />
             <h1 className="mt-4 font-body text-3xl font-extrabold">
               Create Account

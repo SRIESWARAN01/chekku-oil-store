@@ -121,6 +121,14 @@ export default async function ContactPage() {
                         <br />
                         {settings.address}
                       </p>
+                      <a 
+                        href="https://maps.app.goo.gl/ErtZbKciBULoFxQ6A"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-leaf hover:underline"
+                      >
+                        📍 Open in Google Maps
+                      </a>
                     </div>
                   </div>
                 </div>

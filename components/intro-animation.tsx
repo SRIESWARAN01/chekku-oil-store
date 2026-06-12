@@ -67,11 +67,11 @@ export function IntroAnimation() {
         
         {/* Transparent Logo with entrance transition */}
         <div className="relative mb-6 animate-logo-entrance">
-          <div className="absolute inset-0 rounded-full bg-yellow-400/10 blur-xl scale-110 pointer-events-none" />
+          <div className="absolute inset-0 bg-yellow-400/10 blur-xl scale-110 pointer-events-none" />
           <img
             src="/logo.png"
             alt="Thennaiyan logo"
-            className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border border-yellow-500/20 object-cover shadow-2xl relative"
+            className="w-24 h-24 sm:w-28 sm:h-28 border border-yellow-500/20 object-contain shadow-2xl relative"
           />
         </div>
 

@@ -5,12 +5,20 @@ import { useLanguage } from "@/lib/language-context";
 interface HeroBannerProps {
   businessName: string;
   heroBannerImage?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
 }
 
-export function HeroBanner({ businessName, heroBannerImage }: HeroBannerProps) {
+export function HeroBanner({ 
+  businessName, 
+  heroBannerImage,
+  heroTitle,
+  heroSubtitle
+}: HeroBannerProps) {
   const { t, lang } = useLanguage();
 
-  const displayName = lang === "ta" ? t("businessName") : businessName;
+  const displayTitle = heroTitle || (lang === "ta" ? t("businessName") : businessName);
+  const displaySubtitle = heroSubtitle || t("taglineSubtitle");
 
   return (
     <section 
@@ -35,11 +43,11 @@ export function HeroBanner({ businessName, heroBannerImage }: HeroBannerProps) {
         </span>
 
         <h1 className="font-body font-extrabold text-4xl md:text-5xl lg:text-6xl tracking-tight text-white mb-4 leading-tight">
-          {displayName}
+          {displayTitle}
         </h1>
 
         <p className="font-body text-base md:text-lg lg:text-xl font-bold text-white/95 mb-2 max-w-xl">
-          {t("taglineSubtitle")}
+          {displaySubtitle}
         </p>
         <p className="font-body text-xs md:text-sm text-white/80 mb-8 max-w-lg">
           {t("exploreWhatsApp")}
