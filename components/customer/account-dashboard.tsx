@@ -16,9 +16,11 @@ import {
   Calendar,
   Lock,
   ArrowRight,
-  ExternalLink
+  ExternalLink,
+  LogOut
 } from "lucide-react";
 import { updateProfile, saveAddress, deleteAddress } from "@/app/actions/customer";
+import { signOut } from "@/app/actions/auth";
 import Link from "next/link";
 
 type Tab = "orders" | "wishlist" | "enquiries" | "addresses" | "settings";
@@ -214,6 +216,15 @@ export function AccountDashboard({
               </button>
             );
           })}
+          <form action={signOut} className="mt-2 pt-2 border-t border-gray-100">
+            <button
+              type="submit"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg font-body text-sm font-semibold text-rose-600 hover:bg-rose-50 transition-all"
+            >
+              <LogOut size={18} className="text-rose-500" />
+              <span>Logout</span>
+            </button>
+          </form>
         </nav>
       </div>
 
