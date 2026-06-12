@@ -529,16 +529,6 @@ create policy "analytics_events_admin_read" on public.analytics_events
   for select using (public.is_admin());
 
 -- ── SEED DATA (matches the homepage demo cards) ─────────────────────────────
-insert into public.categories (slug, name, description, position) values
-  ('brownies',  'BROWNIES',      'Delicious freshly baked brownies', 1),
-  ('birthday-cakes',  'Birthday Cakes',      'Artisan custom cakes', 2),
-  ('cold-beverages',  'COLD BEVERAGES',      'Refreshing cold drinks', 3),
-  ('special-desserts',  'Thennaiyan Specials',      'Signature specials', 4),
-  ('dessert',  'Dessert',      'Gourmet sweet treats', 5),
-  ('hot-serves',  'Hot Serves',      'Hot beverages and foods', 6),
-  ('main-course',  'Main Course',      'Savory food selections', 7),
-  ('make-it-a-meal',  'Make It A Meal',      'Meal packages', 8)
-on conflict (slug) do nothing;
 
 -- ════════════════════════════════════════════════════════════════════════════
 -- ADMIN CMS ADDITIONS

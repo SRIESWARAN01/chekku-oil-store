@@ -21,15 +21,6 @@ export const translations = {
     "hair": "Hair & Beauty",
     "cooking": "Cooking",
     
-    // Fallback Mock Categories (Keep for safety)
-    "brownies": "Brownies",
-    "birthday-cakes": "Birthday Cakes",
-    "cold-beverages": "Cold Beverages",
-    "special-desserts": "Thennaiyan Specials",
-    "dessert": "Dessert",
-    "hot-serves": "Hot Serves",
-    "main-course": "Main Course",
-    "make-it-a-meal": "Make It A Meal",
 
     // Product Card / Actions
     add: "Add",
@@ -97,15 +88,6 @@ export const translations = {
     "hair": "கூந்தல் & அழகு",
     "cooking": "சமையல் எண்ணெய்",
     
-    // Fallback Mock Categories
-    "brownies": "பிரவுனிகள்",
-    "birthday-cakes": "பிறந்தநாள் கேக்குகள்",
-    "cold-beverages": "குளிர் பானங்கள்",
-    "special-desserts": "தென்னையன் ஸ்பெஷல்ஸ்",
-    "dessert": "இனிப்புகள்",
-    "hot-serves": "சூடான உணவு",
-    "main-course": "முக்கிய உணவு",
-    "make-it-a-meal": "முழு உணவு",
 
     // Product Card / Actions
     add: "சேர்",
