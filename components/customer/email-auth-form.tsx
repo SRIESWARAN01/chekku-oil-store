@@ -59,7 +59,7 @@ export function EmailAuthForm({ next, mode = "login" }: EmailAuthFormProps) {
                 required
                 autoComplete="name"
                 placeholder="e.g. Ravi Kumar"
-                className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
+                className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-base md:text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
               />
             </div>
           </div>
@@ -80,7 +80,7 @@ export function EmailAuthForm({ next, mode = "login" }: EmailAuthFormProps) {
                 required
                 autoComplete="tel"
                 placeholder="+91 98765 43210"
-                className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
+                className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-base md:text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
               />
             </div>
           </div>
@@ -103,7 +103,7 @@ export function EmailAuthForm({ next, mode = "login" }: EmailAuthFormProps) {
             required
             autoComplete="email"
             placeholder="you@gmail.com"
-            className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
+            className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-base md:text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
           />
         </div>
       </div>
@@ -124,7 +124,7 @@ export function EmailAuthForm({ next, mode = "login" }: EmailAuthFormProps) {
             required
             autoComplete={mode === "signup" ? "new-password" : "current-password"}
             placeholder="••••••••"
-            className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
+            className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-base md:text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
           />
         </div>
       </div>
@@ -146,7 +146,7 @@ export function EmailAuthForm({ next, mode = "login" }: EmailAuthFormProps) {
               required
               autoComplete="new-password"
               placeholder="••••••••"
-              className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
+              className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-base md:text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
             />
           </div>
         </div>

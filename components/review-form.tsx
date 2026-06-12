@@ -50,9 +50,9 @@ export function ReviewForm({ productId, orderId }: { productId: string; orderId:
         ))}
       </div>
       <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title (optional)"
-        className="w-full border border-[#d0d5dd] rounded-[6px] px-3 py-2 font-body text-sm outline-none focus:border-[#356f3b]" />
+        className="w-full border border-[#d0d5dd] rounded-[6px] px-3 py-2 font-body text-base md:text-sm outline-none focus:border-[#356f3b]" />
       <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="Your review (optional)" rows={3}
-        className="w-full border border-[#d0d5dd] rounded-[6px] px-3 py-2 font-body text-sm outline-none focus:border-[#356f3b] resize-none" />
+        className="w-full border border-[#d0d5dd] rounded-[6px] px-3 py-2 font-body text-base md:text-sm outline-none focus:border-[#356f3b] resize-none" />
       {error && <p className="font-body text-xs text-red-600">{error}</p>}
       <button onClick={submit} disabled={isPending}
         className="inline-flex items-center gap-1.5 rounded-[6px] bg-[#356f3b] px-4 py-2 font-body text-sm font-bold text-white disabled:opacity-60">

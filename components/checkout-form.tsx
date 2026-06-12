@@ -48,7 +48,7 @@ export function CheckoutForm({ items, defaultName, defaultPhone }: Props) {
                 <label htmlFor={f.name} className="block font-mono text-[10px] uppercase tracking-wider text-[#667085] mb-1">{f.label}</label>
                 <input id={f.name} name={f.name} type={f.type} placeholder={f.placeholder} defaultValue={f.defaultValue}
                   required={!f.label.includes("optional")}
-                  className="w-full border border-[#d0d5dd] rounded-[6px] px-3 py-2 font-body text-sm outline-none focus:border-[#356f3b] transition-colors" />
+                  className="w-full border border-[#d0d5dd] rounded-[6px] px-3 py-2 font-body text-base md:text-sm outline-none focus:border-[#356f3b] transition-colors" />
               </div>
             ))}
           </div>
@@ -56,7 +56,7 @@ export function CheckoutForm({ items, defaultName, defaultPhone }: Props) {
 
         <div className="rounded-[8px] bg-white p-5 shadow-[0_4px_12px_rgba(15,23,42,0.06)]">
           <p className="font-body text-xs font-extrabold uppercase tracking-wider text-[#667085] mb-3">Coupon code</p>
-          <input name="coupon_code" placeholder="Optional coupon code" className="w-full border border-[#d0d5dd] rounded-[6px] px-3 py-2 font-mono text-sm uppercase outline-none focus:border-[#356f3b]" />
+          <input name="coupon_code" placeholder="Optional coupon code" className="w-full border border-[#d0d5dd] rounded-[6px] px-3 py-2 font-mono text-base md:text-sm uppercase outline-none focus:border-[#356f3b]" />
         </div>
       </div>
 

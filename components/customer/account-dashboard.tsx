@@ -443,7 +443,7 @@ export function AccountDashboard({
                       required
                       value={addrName}
                       onChange={(e) => setAddrName(e.target.value)}
-                      className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-sm bg-white outline-none focus:border-[#1f6b3b]"
+                      className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-base md:text-sm bg-white outline-none focus:border-[#1f6b3b]"
                     />
                   </div>
                   <div className="space-y-1">
@@ -453,7 +453,7 @@ export function AccountDashboard({
                       required
                       value={addrPhone}
                       onChange={(e) => setAddrPhone(e.target.value)}
-                      className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-sm bg-white outline-none focus:border-[#1f6b3b]"
+                      className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-base md:text-sm bg-white outline-none focus:border-[#1f6b3b]"
                     />
                   </div>
                 </div>
@@ -466,7 +466,7 @@ export function AccountDashboard({
                     value={addrLine1}
                     onChange={(e) => setAddrLine1(e.target.value)}
                     placeholder="House/Flat No, Building Name, Street"
-                    className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-sm bg-white outline-none focus:border-[#1f6b3b]"
+                    className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-base md:text-sm bg-white outline-none focus:border-[#1f6b3b]"
                   />
                 </div>
 
@@ -477,7 +477,7 @@ export function AccountDashboard({
                     value={addrLine2}
                     onChange={(e) => setAddrLine2(e.target.value)}
                     placeholder="Landmark, Area"
-                    className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-sm bg-white outline-none focus:border-[#1f6b3b]"
+                    className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-base md:text-sm bg-white outline-none focus:border-[#1f6b3b]"
                   />
                 </div>
 
@@ -489,7 +489,7 @@ export function AccountDashboard({
                       required
                       value={addrCity}
                       onChange={(e) => setAddrCity(e.target.value)}
-                      className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-sm bg-white outline-none focus:border-[#1f6b3b]"
+                      className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-base md:text-sm bg-white outline-none focus:border-[#1f6b3b]"
                     />
                   </div>
                   <div className="space-y-1">
@@ -499,7 +499,7 @@ export function AccountDashboard({
                       required
                       value={addrState}
                       onChange={(e) => setAddrState(e.target.value)}
-                      className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-sm bg-white outline-none focus:border-[#1f6b3b]"
+                      className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-base md:text-sm bg-white outline-none focus:border-[#1f6b3b]"
                     />
                   </div>
                   <div className="space-y-1">
@@ -509,7 +509,7 @@ export function AccountDashboard({
                       required
                       value={addrPincode}
                       onChange={(e) => setAddrPincode(e.target.value)}
-                      className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-sm bg-white outline-none focus:border-[#1f6b3b]"
+                      className="w-full border border-gray-200 rounded-lg p-2.5 font-body text-base md:text-sm bg-white outline-none focus:border-[#1f6b3b]"
                     />
                   </div>
                 </div>
@@ -614,7 +614,7 @@ export function AccountDashboard({
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="w-full border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 font-body text-sm bg-white outline-none focus:border-[#1f6b3b]"
+                    className="w-full border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 font-body text-base md:text-sm bg-white outline-none focus:border-[#1f6b3b]"
                   />
                 </div>
               </div>
@@ -632,7 +632,7 @@ export function AccountDashboard({
                     required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 font-body text-sm bg-white outline-none focus:border-[#1f6b3b]"
+                    className="w-full border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 font-body text-base md:text-sm bg-white outline-none focus:border-[#1f6b3b]"
                   />
                 </div>
               </div>
@@ -649,7 +649,7 @@ export function AccountDashboard({
                     type="email"
                     disabled
                     value={profile?.email || user?.email}
-                    className="w-full border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 font-body text-sm bg-gray-50 text-gray-500 outline-none cursor-not-allowed"
+                    className="w-full border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 font-body text-base md:text-sm bg-gray-50 text-gray-500 outline-none cursor-not-allowed"
                   />
                 </div>
               </div>

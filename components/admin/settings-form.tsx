@@ -36,7 +36,7 @@ const INITIAL: SettingsActionState = {};
 const labelCls =
   "font-body text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2";
 const inputCls =
-  "w-full bg-white border border-gray-200 focus:border-leaf focus:ring-1 focus:ring-leaf focus:outline-none transition-all duration-200 px-4 py-2.5 text-sm text-gray-900 font-body rounded-xl shadow-xs placeholder-gray-400/60";
+  "w-full bg-white border border-gray-200 focus:border-leaf focus:ring-1 focus:ring-leaf focus:outline-none transition-all duration-200 px-4 py-2.5 text-base md:text-sm text-gray-900 font-body rounded-xl shadow-xs placeholder-gray-400/60";
 
 function Field({
   label,

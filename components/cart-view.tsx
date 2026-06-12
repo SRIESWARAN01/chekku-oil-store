@@ -265,7 +265,7 @@ export function CartView({ settings }: CartViewProps) {
                   onChange={(e) => setCouponCode(e.target.value)}
                   disabled={appliedCoupon !== null}
                   placeholder="ENTER COUPON CODE"
-                  className="flex-1 border border-gray-200 rounded-lg px-3.5 py-2 font-mono text-sm uppercase outline-none focus:border-[#1f6b3b] disabled:bg-gray-50 disabled:text-gray-400"
+                  className="flex-1 border border-gray-200 rounded-lg px-3.5 py-2 font-mono text-base md:text-sm uppercase outline-none focus:border-[#1f6b3b] disabled:bg-gray-50 disabled:text-gray-400"
                 />
                 {appliedCoupon ? (
                   <button
@@ -351,7 +351,7 @@ export function CartView({ settings }: CartViewProps) {
                       value={callbackName}
                       onChange={(e) => setCallbackName(e.target.value)}
                       placeholder="e.g. John Doe"
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs outline-none focus:border-[#1f6b3b]"
+                      className="w-full border border-gray-200 rounded-lg px-3 py-2 text-base md:text-sm outline-none focus:border-[#1f6b3b]"
                     />
                   </div>
                   <div>
@@ -364,7 +364,7 @@ export function CartView({ settings }: CartViewProps) {
                       value={callbackPhone}
                       onChange={(e) => setCallbackPhone(e.target.value)}
                       placeholder="e.g. +91 98765 43210"
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs outline-none focus:border-[#1f6b3b]"
+                      className="w-full border border-gray-200 rounded-lg px-3 py-2 text-base md:text-sm outline-none focus:border-[#1f6b3b]"
                     />
                   </div>
                   {callbackError && (

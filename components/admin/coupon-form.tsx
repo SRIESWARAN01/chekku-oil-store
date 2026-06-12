@@ -9,7 +9,7 @@ const INITIAL: CouponActionState = {};
 const labelCls =
   "font-mono text-[10px] text-shell-husk uppercase tracking-wider block mb-1.5";
 const inputCls =
-  "w-full bg-kernel border border-shell/20 focus:border-leaf focus:outline-none transition-colors px-3 py-2 text-sm text-ink font-body rounded-sm";
+  "w-full bg-kernel border border-shell/20 focus:border-leaf focus:outline-none transition-colors px-3 py-2 text-base md:text-sm text-ink font-body rounded-sm";
 
 export function CouponForm() {
   const [state, formAction, pending] = useActionState<CouponActionState, FormData>(

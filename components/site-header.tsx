@@ -67,7 +67,7 @@ export function SiteHeader() {
           <Link
             href="/cart"
             aria-label={t("cart")}
-            className="p-2 hover:bg-gray-50 rounded-full transition-colors relative"
+            className="p-2 hover:bg-gray-50 rounded-full transition-colors relative hidden md:block"
           >
             <ShoppingCart size={20} strokeWidth={2} />
             {cartCount > 0 && (
@@ -86,14 +86,14 @@ export function SiteHeader() {
           <Link
             href="/account"
             aria-label="Account"
-            className="p-2 hover:bg-gray-50 rounded-full transition-colors"
+            className="p-2 hover:bg-gray-50 rounded-full transition-colors hidden md:block"
           >
             <User size={20} strokeWidth={2} />
           </Link>
           <Link
             href="/account/orders"
             aria-label={t("orderHistory")}
-            className="p-2 hover:bg-gray-50 rounded-full transition-colors"
+            className="p-2 hover:bg-gray-50 rounded-full transition-colors hidden md:block"
           >
             <History size={20} strokeWidth={2} />
           </Link>
