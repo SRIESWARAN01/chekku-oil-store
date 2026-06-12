@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCart, QrCode, History } from "lucide-react";
+import { ShoppingCart, QrCode, History, User } from "lucide-react";
 import { useLanguage } from "@/lib/language-context";
 import { LanguageToggle } from "./language-toggle";
 
@@ -12,16 +12,34 @@ export function SiteHeader() {
     <header className="border-b border-gray-100 bg-white sticky top-0 z-40">
       <div className="container flex items-center justify-between h-16">
         {/* Logo and Brand */}
-        <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-          <img
-            src="/logo.jpg"
-            alt={t("brand")}
-            className="h-9 w-9 rounded-full border border-leaf/10 object-cover"
-          />
-          <span className="font-body font-bold text-lg text-ink tracking-tight">
-            {t("brand")}
-          </span>
-        </Link>
+        <div className="flex items-center gap-6">
+          <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
+            <img
+              src="/logo.jpg"
+              alt={t("brand")}
+              className="h-9 w-9 rounded-full border border-leaf/10 object-cover"
+            />
+            <span className="font-body font-bold text-lg text-ink tracking-tight">
+              {t("brand")}
+            </span>
+          </Link>
+
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-5 text-sm font-semibold text-gray-600">
+            <Link href="/#products" className="hover:text-leaf transition-colors">
+              Products
+            </Link>
+            <Link href="/story" className="hover:text-leaf transition-colors">
+              Story
+            </Link>
+            <Link href="/journal" className="hover:text-leaf transition-colors">
+              Journal
+            </Link>
+            <Link href="/contact" className="hover:text-leaf transition-colors">
+              Contact
+            </Link>
+          </nav>
+        </div>
 
         {/* Header Actions */}
         <div className="flex items-center gap-2 text-gray-700">
@@ -41,6 +59,13 @@ export function SiteHeader() {
           >
             <QrCode size={20} strokeWidth={2} />
           </button>
+          <Link
+            href="/account"
+            aria-label="Account"
+            className="p-2 hover:bg-gray-50 rounded-full transition-colors"
+          >
+            <User size={20} strokeWidth={2} />
+          </Link>
           <Link
             href="/account/orders"
             aria-label={t("orderHistory")}
