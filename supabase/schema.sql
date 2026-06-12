@@ -326,11 +326,20 @@ end $$;
 
 -- ── HELPER FUNCTION: is_admin() ─────────────────────────────────────────────
 create or replace function public.is_admin()
-returns boolean language sql security definer set search_path = public stable as $$
-  select exists (
+returns boolean language plpgsql security definer set search_path = public stable as $$
+declare
+  current_uid uuid;
+begin
+  current_uid := auth.uid();
+  if current_uid is null then
+    return false;
+  end if;
+  
+  return exists (
     select 1 from public.profiles
-    where id = auth.uid() and role = 'admin'
+    where id = current_uid and role = 'admin'
   );
+end;
 $$;
 
 create or replace function public.log_order_status_event()

@@ -170,7 +170,7 @@ export function AccountDashboard({
           </p>
           {profile?.phone && (
             <p className="font-body text-xs font-semibold text-[#1f6b3b] mt-1.5 bg-[#edf6ee] px-2.5 py-0.5 rounded-full">
-              {profile.phone}
+              {profile?.phone}
             </p>
           )}
         </div>
