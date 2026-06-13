@@ -135,6 +135,7 @@ export default async function ContactPage() {
               </div>
 
               {/* Form Column */}
+              {/* Responsive container padding: tighter p-5 on mobile, standard p-8 on tablet, p-10 on desktop */}
               <div className="bg-kernel p-5 sm:p-8 lg:p-10 border hairline shadow-sm">
                 <h3
                   className="font-display text-2xl text-ink mb-8"

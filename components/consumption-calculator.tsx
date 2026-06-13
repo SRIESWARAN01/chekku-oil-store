@@ -17,11 +17,13 @@ export function ConsumptionCalculator() {
   const transFatReduced = (refinedUsage * 22).toFixed(0); // estimated grams of trans fats avoided per month
 
   return (
+    /* Responsive card wrapper: tighter padding p-4 on mobile devices, standard p-6 on larger screens */
     <div className="mx-auto max-w-2xl rounded-2xl border border-leaf/10 bg-white p-4 sm:p-6 shadow-[0_10px_35px_-10px_rgba(33,119,67,0.08)]">
       <div className="mb-2 flex items-start gap-2">
         <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-leaf/10 text-leaf">
           <Sparkles size={16} className="fill-leaf/20" />
         </span>
+        {/* Responsive text size: smaller text-lg on mobile, text-xl on larger screens */}
         <h2 className="font-body text-lg font-extrabold leading-tight text-ink sm:text-xl">
           {t("calcTitle")}
         </h2>
@@ -106,6 +108,7 @@ export function ConsumptionCalculator() {
           </div>
 
           {/* Key Metric: Savings & Health */}
+          {/* Responsive metric layout: stacks (1 col) on mobile to prevent overflow, displays side-by-side (2 cols) on larger screens */}
           <div className="grid grid-cols-1 gap-2 border-t border-gray-200/80 pt-3 sm:grid-cols-2">
             <div className="bg-white border border-gray-100 p-2.5 rounded-lg">
               <p className="font-body text-[10px] text-gray-400 font-bold uppercase tracking-wider">

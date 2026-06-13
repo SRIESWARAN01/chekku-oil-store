@@ -52,6 +52,7 @@ export default async function AdminLayout({
   }
 
   return (
+    /* Responsive layout: stacks on mobile/tablet, displays side-by-side (grid) on large displays (lg:grid-cols-[240px_1fr]) */
     <div className="min-h-screen bg-kernel-deeper/20 lg:grid lg:grid-cols-[240px_1fr]">
       {/* Sidebar */}
       <aside className="bg-leaf-deep text-kernel lg:min-h-screen flex flex-col">
@@ -95,6 +96,7 @@ export default async function AdminLayout({
 
       {/* Main */}
       <div className="min-w-0">
+        {/* Responsive padding: tighter p-4 on mobile, p-6 on tablet, p-10 on desktop */}
         <div className="p-4 sm:p-6 lg:p-10 max-w-5xl">{children}</div>
       </div>
     </div>

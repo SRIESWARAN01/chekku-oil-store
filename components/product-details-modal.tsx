@@ -213,7 +213,9 @@ export function ProductDetailsModal({
               </div>
             </div>
 
+            {/* Responsive details grid: 1 column on mobile, 2 columns on tablet and desktop */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-[11px] font-body font-bold text-gray-700">
+              {/* Stack labels and values on mobile (flex-col) to prevent overlapping, align side-by-side on larger screens (sm:flex-row) */}
               <div className="flex flex-col gap-0.5 border-b border-gray-100 py-1 sm:flex-row sm:justify-between">
                 <span className="text-gray-400 font-semibold">{t("extractionMethod")}:</span>
                 <span className="text-ink sm:text-right">{isVirgin ? "Centrifuge" : "Wood Press"}</span>

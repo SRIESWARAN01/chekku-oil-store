@@ -302,6 +302,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
         <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
           Pricing, Branding & Sorting
         </h3>
+        {/* Responsive pricing grid: stacks into 2 columns (grid-cols-2) on mobile, 4 columns (sm:grid-cols-4) on larger screens */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
           <div>
             <label className={labelCls}>Starting Price (₹) *</label>

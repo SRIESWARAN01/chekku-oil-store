@@ -63,6 +63,7 @@ export default async function StoryPage() {
                 </p>
               </div>
 
+              {/* Responsive card padding: tighter p-5 on mobile, standard p-8 on tablet, p-10 on desktop */}
               <div className="bg-kernel p-5 sm:p-8 lg:p-10 border hairline shadow-sm space-y-8">
                 <div className="flex items-center justify-between border-b border-shell/15 pb-6">
                   <div>
@@ -78,7 +79,7 @@ export default async function StoryPage() {
                   </div>
                   <Landmark className="text-oil" size={28} strokeWidth={1.5} />
                 </div>
-
+ 
                 <div className="grid sm:grid-cols-2 gap-6 font-body text-sm text-shell">
                   <div className="space-y-1">
                     <span className="font-mono text-xs text-shell-husk flex items-center gap-1.5">
@@ -86,18 +87,19 @@ export default async function StoryPage() {
                     </span>
                     <p className="font-semibold text-ink">{settings.business_name}</p>
                   </div>
-
+ 
                   <div className="space-y-1">
                     <span className="font-mono text-xs text-shell-husk flex items-center gap-1.5">
                       <User size={14} className="text-leaf" /> Legal Owner
                     </span>
                     <p className="font-semibold text-ink">{settings.legal_owner}</p>
                   </div>
-
+ 
                   <div className="space-y-1">
                     <span className="font-mono text-xs text-shell-husk flex items-center gap-1.5">
                       <FileText size={14} className="text-leaf" /> GST Number (GSTIN)
                     </span>
+                    {/* Add break-all to prevent long GSTIN values from causing horizontal scroll/overflow on mobile */}
                     <p className="font-mono font-semibold text-ink break-all">
                       {settings.gst_number}
                     </p>

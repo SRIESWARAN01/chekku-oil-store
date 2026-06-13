@@ -32,6 +32,7 @@ export default async function CartPage() {
     <div className="min-h-screen bg-[#f7f8f6]">
       <SiteHeader />
 
+      {/* Responsive padding: tighter px-4 on mobile devices, standard px-5 on tablet and laptop screens */}
       <main className="mx-auto max-w-3xl px-4 pb-12 pt-6 sm:px-5">
         <div className="flex items-center justify-between">
           <h1 className="font-body text-xl font-extrabold text-[#111827]">
@@ -51,6 +52,7 @@ export default async function CartPage() {
           <p className="mb-2 font-body text-xs font-semibold text-[#344054]">
             Order type
           </p>
+          {/* Responsive columns: 1 column on mobile, 2 columns on tablet and desktop screens */}
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             <button className="h-10 rounded-[8px] bg-[#f0f2f0] font-body text-sm font-bold text-[#111827] shadow-inner">
               WhatsApp order
@@ -82,6 +84,7 @@ export default async function CartPage() {
         ) : (
           <>
             <section className="mt-4 rounded-[8px] bg-white p-3 shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
+              {/* Responsive item container: elements stack vertically (flex-col) on mobile, align side-by-side (flex-row) on larger screens */}
               <div className="flex flex-col gap-3 sm:flex-row">
                 <div
                   className="h-16 w-16 shrink-0 rounded-[8px]"
