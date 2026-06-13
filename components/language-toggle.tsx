@@ -1,7 +1,6 @@
 "use client";
 
 import { useLanguage } from "@/lib/language-context";
-import { Globe } from "lucide-react";
 
 export function LanguageToggle() {
   const { lang, setLanguage } = useLanguage();
@@ -11,7 +10,7 @@ export function LanguageToggle() {
       <button
         type="button"
         onClick={() => setLanguage("en")}
-        className={`rounded-full px-3 py-1 font-body text-[11px] font-extrabold uppercase tracking-wide transition-all duration-200 ${
+        className={`rounded-full px-2.5 py-1 font-body text-[11px] font-extrabold uppercase tracking-wide transition-all duration-200 sm:px-3 ${
           lang === "en"
             ? "bg-leaf text-white shadow-xs"
             : "text-gray-600 hover:text-gray-900"
@@ -22,13 +21,13 @@ export function LanguageToggle() {
       <button
         type="button"
         onClick={() => setLanguage("ta")}
-        className={`rounded-full px-3 py-1 font-body text-[11px] font-extrabold transition-all duration-200 ${
+        className={`rounded-full px-2.5 py-1 font-body text-[11px] font-extrabold uppercase tracking-wide transition-all duration-200 sm:px-3 ${
           lang === "ta"
             ? "bg-leaf text-white shadow-xs"
             : "text-gray-600 hover:text-gray-900"
         }`}
       >
-        தமிழ்
+        TA
       </button>
     </div>
   );

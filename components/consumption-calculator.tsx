@@ -17,7 +17,7 @@ export function ConsumptionCalculator() {
   const transFatReduced = (refinedUsage * 22).toFixed(0); // estimated grams of trans fats avoided per month
 
   return (
-    <div className="mx-auto max-w-2xl rounded-2xl border border-leaf/10 bg-white p-6 shadow-[0_10px_35px_-10px_rgba(33,119,67,0.08)]">
+    <div className="mx-auto max-w-2xl rounded-2xl border border-leaf/10 bg-white p-4 sm:p-6 shadow-[0_10px_35px_-10px_rgba(33,119,67,0.08)]">
       <div className="flex items-center gap-2 mb-2">
         <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-leaf/10 text-leaf">
           <Sparkles size={16} className="fill-leaf/20" />

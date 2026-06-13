@@ -189,7 +189,7 @@ export function PhoneAuthForm({ next, mode = "login" }: PhoneAuthFormProps) {
                 onChange={(event) => setFullName(event.target.value)}
                 autoComplete="name"
                 placeholder="e.g. Ravi Kumar"
-                className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-base md:text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
+                className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
               />
             </div>
           )}
@@ -209,7 +209,7 @@ export function PhoneAuthForm({ next, mode = "login" }: PhoneAuthFormProps) {
               inputMode="tel"
               autoComplete="tel"
               placeholder="+91 98765 43210"
-              className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-base md:text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
+              className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
             />
           </div>
 
@@ -243,7 +243,7 @@ export function PhoneAuthForm({ next, mode = "login" }: PhoneAuthFormProps) {
               inputMode="numeric"
               autoComplete="one-time-code"
               placeholder="123456"
-              className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-base md:text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
+              className="w-full border-b border-shell/30 bg-transparent py-2 font-body text-sm text-ink outline-none transition-colors placeholder:text-shell/30 focus:border-leaf"
             />
           </div>
 

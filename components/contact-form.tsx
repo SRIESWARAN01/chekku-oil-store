@@ -26,7 +26,7 @@ export function ContactForm() {
           type="text"
           required
           placeholder="e.g. Tamilarasan"
-          className="w-full bg-transparent border-b border-shell/30 focus:border-leaf focus:outline-none transition-colors py-2 text-base md:text-sm text-ink placeholder-shell/30 font-body"
+          className="w-full bg-transparent border-b border-shell/30 focus:border-leaf focus:outline-none transition-colors py-2 text-sm text-ink placeholder-shell/30 font-body"
         />
       </div>
 
@@ -40,7 +40,7 @@ export function ContactForm() {
           type="email"
           required
           placeholder="e.g. you@example.com"
-          className="w-full bg-transparent border-b border-shell/30 focus:border-leaf focus:outline-none transition-colors py-2 text-base md:text-sm text-ink placeholder-shell/30 font-body"
+          className="w-full bg-transparent border-b border-shell/30 focus:border-leaf focus:outline-none transition-colors py-2 text-sm text-ink placeholder-shell/30 font-body"
         />
       </div>
 
@@ -54,7 +54,7 @@ export function ContactForm() {
           required
           rows={4}
           placeholder="Tell us what you're looking for..."
-          className="w-full bg-transparent border-b border-shell/30 focus:border-leaf focus:outline-none transition-colors py-2 text-base md:text-sm text-ink placeholder-shell/30 font-body resize-none"
+          className="w-full bg-transparent border-b border-shell/30 focus:border-leaf focus:outline-none transition-colors py-2 text-sm text-ink placeholder-shell/30 font-body resize-none"
         />
       </div>
 

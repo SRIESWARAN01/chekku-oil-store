@@ -57,34 +57,38 @@ export function MobileNav() {
   ];
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-100 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] z-50 h-16 safe-bottom">
-      <nav className="grid grid-cols-4 h-full">
-        {navItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = pathname === item.href;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex flex-col items-center justify-center gap-1 transition-colors duration-200 ${
-                isActive ? "text-[#1f6b3b]" : "text-gray-400 hover:text-gray-600"
-              }`}
-            >
-              <div className="relative">
-                <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
-                {item.label === "Cart" && cartCount > 0 && (
-                  <span className={`absolute -top-1.5 -right-2 bg-[#217743] text-white text-[8px] font-extrabold h-3.5 w-3.5 rounded-full flex items-center justify-center border border-white ${animate ? "animate-pulse-badge" : ""}`}>
-                    {cartCount}
-                  </span>
-                )}
-              </div>
-              <span className="text-[10px] font-bold tracking-wide uppercase">
-                {item.label}
-              </span>
-            </Link>
-          );
-        })}
-      </nav>
-    </div>
+    <>
+      <div className="fixed inset-x-0 bottom-0 z-50 h-16 border-t border-gray-100 bg-white/95 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] backdrop-blur-md safe-bottom lg:hidden">
+        <nav className="grid h-full grid-cols-4">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
+                className={`flex min-w-0 flex-col items-center justify-center gap-1 px-1 transition-colors duration-200 ${
+                  isActive ? "text-[#1f6b3b]" : "text-gray-400 hover:text-gray-600"
+                }`}
+              >
+                <div className="relative">
+                  <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+                  {item.label === "Cart" && cartCount > 0 && (
+                    <span className={`absolute -right-2 -top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full border border-white bg-[#217743] text-[8px] font-extrabold text-white ${animate ? "animate-pulse-badge" : ""}`}>
+                      {cartCount}
+                    </span>
+                  )}
+                </div>
+                <span className="max-w-full truncate text-[10px] font-bold uppercase tracking-wide">
+                  {item.label}
+                </span>
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+      <div aria-hidden="true" className="h-16 safe-bottom lg:hidden" />
+    </>
   );
 }

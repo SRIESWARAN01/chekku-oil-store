@@ -33,14 +33,12 @@ export interface ProductRow {
   position: number;
   starting_from_inr: number | string;
   rating: number | string | null;
-  brand?: string | null;
   benefits: string[] | null;
   hue_a: string;
   hue_b: string;
   categories?: { slug: string } | { slug: string }[] | null;
   is_veg?: boolean;
   is_best_seller?: boolean;
-  product_variants?: { id: string; size_label: string; price_inr: number | string; stock: number }[] | null;
 }
 
 export interface JournalEntryView {
@@ -77,9 +75,6 @@ export interface SiteSettings {
   gst_certificate_issue_date: string;
   additional_branches: string;
   address: string;
-  hero_banner_image?: string;
-  hero_title?: string;
-  hero_subtitle?: string;
 }
 
 // ── Default settings ─────────────────────────────────────────────────────────
@@ -105,9 +100,6 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   gst_certificate_issue_date: "22/01/2026",
   additional_branches: "0 (No additional registered business locations)",
   address: "No. 265/3B, Veppampatti Vilakku, Peraiyur Main Road Near Bus Stop, Pappinaickanpatti, Peraiyur, Madurai District, Tamil Nadu - 625705, India",
-  hero_banner_image: "/images/hero_banner.png",
-  hero_title: "",
-  hero_subtitle: "",
 };
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -129,21 +121,6 @@ export function mapProductRowToCard(row: ProductRow): ProductCardData {
   const cat = Array.isArray(row.categories)
     ? row.categories[0]?.slug
     : row.categories?.slug;
-    
-  const hasVariants = row.product_variants && row.product_variants.length > 0;
-  const inStock = hasVariants
-    ? row.product_variants!.some((v) => v.stock > 0)
-    : true; // Default to true if no variants are created yet
-
-  const mappedVariants = row.product_variants
-    ? row.product_variants.map((v) => ({
-        id: v.id,
-        sizeLabel: v.size_label,
-        priceInr: Number(v.price_inr) || 0,
-        stock: v.stock || 0,
-      }))
-    : [];
-
   return {
     slug: row.slug,
     name: row.name,
@@ -161,9 +138,6 @@ export function mapProductRowToCard(row: ProductRow): ProductCardData {
     isVeg: row.is_veg ?? true,
     isBestSeller: row.is_best_seller ?? true,
     image: row.hero_image ?? undefined,
-    brand: row.brand || "Thennaiyan",
-    inStock,
-    variants: mappedVariants,
   };
 }
 
@@ -174,7 +148,7 @@ export async function getProducts(): Promise<ProductCardData[]> {
     const supabase = await createClient();
     const { data, error } = await supabase
       .from("products")
-      .select("*, categories(slug), product_variants(id, size_label, price_inr, stock)")
+      .select("*, categories(slug)")
       .eq("is_active", true)
       .order("position", { ascending: true });
     if (error || !data) return [];

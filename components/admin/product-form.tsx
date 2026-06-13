@@ -105,7 +105,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       <input type="hidden" name="hero_image" value={heroImageUrl} />
 
       {/* CARD 1: Basic Information */}
-      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+      <div className="bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
         <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
           Basic Details
         </h3>
@@ -159,14 +159,14 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       </div>
 
       {/* CARD 2: Product Image & Assets */}
-      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+      <div className="bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
         <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
           Product Image & Assets
         </h3>
         
-        <div className="grid md:grid-cols-[200px_1fr] gap-6 items-center">
+        <div className="grid gap-6 items-center md:grid-cols-[200px_1fr]">
           {/* Image Preview */}
-          <div className="aspect-[4/3] w-full max-w-[200px] border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50/50 relative flex items-center justify-center overflow-hidden group hover:border-leaf/50 transition-colors">
+          <div className="aspect-[4/3] w-full max-w-[200px] mx-auto md:mx-0 border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50/50 relative flex items-center justify-center overflow-hidden group hover:border-leaf/50 transition-colors">
             {heroImageUrl ? (
               <>
                 <img
@@ -256,7 +256,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       </div>
 
       {/* CARD 3: Description & Key Benefits */}
-      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+      <div className="bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
         <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
           Description & Marketing Content
         </h3>
@@ -298,11 +298,11 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       </div>
 
       {/* CARD 4: Pricing, Branding & Sorting */}
-      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+      <div className="bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
         <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
           Pricing, Branding & Sorting
         </h3>
-        <div className="grid sm:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
           <div>
             <label className={labelCls}>Starting Price (₹) *</label>
             <input
@@ -352,7 +352,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       </div>
 
       {/* CARD 5: Production Details & Hues */}
-      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+      <div className="bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
         <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
           Manufacturing Details & Visual Hues
         </h3>
@@ -427,7 +427,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       </div>
 
       {/* Active Checkbox Card */}
-      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between">
+      <div className="bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h4 className="font-display text-sm font-bold text-gray-800">
             Publish Status

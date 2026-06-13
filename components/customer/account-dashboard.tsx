@@ -156,8 +156,8 @@ export function AccountDashboard({
 
   return (
     <div className="grid gap-6 lg:grid-cols-[280px_1fr] items-start">
-      {/* Left Sidebar */}
-      <div className="bg-white rounded-[16px] p-6 shadow-[0_8px_30px_rgba(31,107,59,0.04)] border border-[#1f6b3b]/5">
+      {/* Left Sidebar — becomes horizontal scroll on mobile */}
+      <div className="bg-white rounded-[16px] p-4 sm:p-6 shadow-[0_8px_30px_rgba(31,107,59,0.04)] border border-[#1f6b3b]/5">
         <div className="flex flex-col items-center text-center pb-6 border-b border-gray-100">
           <div className="h-20 w-20 rounded-full bg-gradient-to-tr from-[#1f6b3b] to-[#356f3b] text-white flex items-center justify-center font-display text-2xl font-bold shadow-md">
             {initials}
@@ -175,8 +175,8 @@ export function AccountDashboard({
           )}
         </div>
 
-        {/* Navigation Menu */}
-        <nav className="mt-6 space-y-1">
+        {/* Navigation Menu — horizontal on mobile, vertical on desktop */}
+        <nav className="mt-4 lg:mt-6 flex lg:flex-col gap-1.5 lg:gap-1 overflow-x-auto scrollbar-none pb-2 lg:pb-0 -mx-1 px-1">
           {[
             { id: "orders", label: "My Orders", icon: ShoppingBag, count: orders.length },
             { id: "wishlist", label: "My Wishlist", icon: Heart },
@@ -194,7 +194,7 @@ export function AccountDashboard({
                   setShowAddressForm(false);
                   setEditingAddress(null);
                 }}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-lg font-body text-sm font-semibold transition-all ${
+                className={`flex items-center justify-between px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg font-body text-sm font-semibold transition-all whitespace-nowrap shrink-0 lg:shrink lg:w-full ${
                   isActive
                     ? "bg-[#1f6b3b] text-white shadow-sm"
                     : "text-gray-600 hover:bg-[#edf6ee] hover:text-[#1f6b3b]"
@@ -216,7 +216,7 @@ export function AccountDashboard({
               </button>
             );
           })}
-          <form action={signOut} className="mt-2 pt-2 border-t border-gray-100">
+          <form action={signOut} className="mt-2 pt-2 border-t border-gray-100 shrink-0">
             <button
               type="submit"
               className="w-full flex items-center gap-3 px-4 py-3 rounded-lg font-body text-sm font-semibold text-rose-600 hover:bg-rose-50 transition-all"
@@ -229,7 +229,7 @@ export function AccountDashboard({
       </div>
 
       {/* Right Content Panel */}
-      <div className="bg-white rounded-[16px] p-6 sm:p-8 shadow-[0_8px_30px_rgba(31,107,59,0.04)] border border-[#1f6b3b]/5 min-h-[480px]">
+      <div className="bg-white rounded-[16px] p-4 sm:p-6 md:p-8 shadow-[0_8px_30px_rgba(31,107,59,0.04)] border border-[#1f6b3b]/5 min-h-[480px]">
         {/* Tab 1: My Orders */}
         {activeTab === "orders" && (
           <div>
@@ -481,7 +481,7 @@ export function AccountDashboard({
                   />
                 </div>
 
-                <div className="grid gap-4 grid-cols-3">
+                <div className="grid gap-4 grid-cols-1 sm:grid-cols-3">
                   <div className="space-y-1">
                     <label className="block font-mono text-[9px] uppercase tracking-wider text-gray-500">City</label>
                     <input

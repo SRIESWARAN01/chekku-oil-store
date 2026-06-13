@@ -125,7 +125,7 @@ export function SettingsForm({ settings }: { settings: SettingsValues }) {
       <input type="hidden" name="hero_banner_image" value={heroBannerImage} />
 
       {/* CARD 1: Brand & Contact Info */}
-      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+      <div className="bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
         <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
           Brand & Contact Configuration
         </h3>
@@ -169,7 +169,7 @@ export function SettingsForm({ settings }: { settings: SettingsValues }) {
       </div>
 
       {/* CARD 2: Homepage Banner Settings */}
-      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+      <div className="bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
         <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
           Homepage Hero Banner Settings
         </h3>
@@ -194,9 +194,9 @@ export function SettingsForm({ settings }: { settings: SettingsValues }) {
         <div className="pt-4 border-t border-gray-100">
           <span className={labelCls}>Banner Background Image</span>
           
-          <div className="grid md:grid-cols-[240px_1fr] gap-6 items-center mt-3">
+          <div className="grid gap-6 items-center md:grid-cols-[240px_1fr] mt-3">
             {/* Banner Preview */}
-            <div className="aspect-[16/9] w-full max-w-[240px] border border-gray-200 rounded-2xl bg-gray-50 overflow-hidden relative flex items-center justify-center group shadow-xs">
+            <div className="aspect-[16/9] w-full max-w-[240px] mx-auto md:mx-0 border border-gray-200 rounded-2xl bg-gray-50 overflow-hidden relative flex items-center justify-center group shadow-xs">
               {heroBannerImage ? (
                 <>
                   <img
@@ -265,7 +265,7 @@ export function SettingsForm({ settings }: { settings: SettingsValues }) {
       </div>
 
       {/* CARD 3: Registration & Story */}
-      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+      <div className="bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
         <h3 className="font-display text-base font-bold text-gray-800 border-b border-gray-100 pb-3">
           Registration & Story Setup
         </h3>

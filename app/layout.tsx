@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, JetBrains_Mono, Manrope } from "next/font/google";
 import { LanguageProvider } from "@/lib/language-context";
 import { MobileNav } from "@/components/mobile-nav";
-import { IntroAnimation } from "@/components/intro-animation";
 import { Toaster } from "@/components/toaster";
 import "./globals.css";
 
@@ -38,16 +37,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#336633",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  themeColor: "#336633",
 };
 
 export default function RootLayout({
   children,
-  }: {
+}: {
   children: React.ReactNode;
 }) {
   return (
@@ -57,10 +54,9 @@ export default function RootLayout({
     >
       <body>
         <LanguageProvider>
-          <IntroAnimation />
-          <Toaster />
           {children}
           <MobileNav />
+          <Toaster />
         </LanguageProvider>
       </body>
     </html>

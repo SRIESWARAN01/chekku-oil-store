@@ -1,99 +1,68 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCart, QrCode, History, User } from "lucide-react";
+import { ShoppingCart, QrCode, History } from "lucide-react";
 import { useLanguage } from "@/lib/language-context";
 import { LanguageToggle } from "./language-toggle";
-import { useCartStore } from "@/lib/cart-store";
-import { useEffect, useState } from "react";
 
 export function SiteHeader() {
   const { t } = useLanguage();
-  const items = useCartStore((state) => state.items);
-  const [mounted, setMounted] = useState(false);
-  const [animate, setAnimate] = useState(false);
-
-  const cartCount = mounted ? items.reduce((sum, item) => sum + item.quantity, 0) : 0;
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (cartCount > 0) {
-      setAnimate(true);
-      const timer = setTimeout(() => setAnimate(false), 300);
-      return () => clearTimeout(timer);
-    }
-  }, [cartCount]);
+  const navLinks = [
+    { href: "/shop", label: "Shop" },
+    { href: "/story", label: "Story" },
+    { href: "/journal", label: "Journal" },
+    { href: "/contact", label: "Contact" },
+  ];
 
   return (
-    <header className="border-b border-gray-100 bg-white sticky top-0 z-40">
-      <div className="container flex items-center justify-between h-16">
+    <header className="sticky top-0 z-40 border-b border-gray-100 bg-white">
+      <div className="container flex min-h-16 items-center justify-between gap-3 py-2">
         {/* Logo and Brand */}
-        <div className="flex items-center gap-6">
-          <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-            <img
-              src="/logo.png"
-              alt={t("brand")}
-              className="h-9 w-9 border border-leaf/10 object-contain"
-            />
-            <span className="font-body font-bold text-lg text-ink tracking-tight">
-              {t("brand")}
-            </span>
-          </Link>
+        <Link href="/" className="flex min-w-0 items-center gap-2 transition-opacity hover:opacity-90">
+          <img
+            src="/logo.jpg"
+            alt={t("brand")}
+            className="h-9 w-9 shrink-0 rounded-full border border-leaf/10 object-cover"
+          />
+          <span className="max-w-[42vw] truncate font-body text-sm font-bold tracking-tight text-ink sm:max-w-[48vw] sm:text-base lg:max-w-none lg:text-lg">
+            {t("brand")}
+          </span>
+        </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-5 text-sm font-semibold text-gray-600">
-            <Link href="/#products" className="hover:text-leaf transition-colors">
-              Products
+        <nav className="hidden items-center justify-center gap-1 lg:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="rounded-[8px] px-3 py-2 font-body text-sm font-bold text-gray-600 transition-colors hover:bg-gray-50 hover:text-leaf"
+            >
+              {link.label}
             </Link>
-            <Link href="/story" className="hover:text-leaf transition-colors">
-              Story
-            </Link>
-            <Link href="/journal" className="hover:text-leaf transition-colors">
-              Journal
-            </Link>
-            <Link href="/contact" className="hover:text-leaf transition-colors">
-              Contact
-            </Link>
-          </nav>
-        </div>
+          ))}
+        </nav>
 
         {/* Header Actions */}
-        <div className="flex items-center gap-2 text-gray-700">
+        <div className="flex shrink-0 items-center gap-1 text-gray-700 sm:gap-2">
           <LanguageToggle />
 
           <Link
             href="/cart"
             aria-label={t("cart")}
-            className="p-2 hover:bg-gray-50 rounded-full transition-colors relative hidden md:block"
+            className="relative hidden h-10 w-10 place-items-center rounded-full transition-colors hover:bg-gray-50 lg:grid"
           >
             <ShoppingCart size={20} strokeWidth={2} />
-            {cartCount > 0 && (
-              <span className={`absolute -top-0.5 -right-0.5 bg-[#217743] text-white text-[9px] font-extrabold h-4 w-4 rounded-full flex items-center justify-center border border-white ${animate ? "animate-pulse-badge" : ""}`}>
-                {cartCount}
-              </span>
-            )}
           </Link>
           <button
             aria-label={t("scanQR")}
             onClick={() => alert("Table scanner initiated...")}
-            className="p-2 hover:bg-gray-50 rounded-full transition-colors"
+            className="hidden h-10 w-10 place-items-center rounded-full transition-colors hover:bg-gray-50 sm:grid"
           >
             <QrCode size={20} strokeWidth={2} />
           </button>
           <Link
-            href="/account"
-            aria-label="Account"
-            className="p-2 hover:bg-gray-50 rounded-full transition-colors hidden md:block"
-          >
-            <User size={20} strokeWidth={2} />
-          </Link>
-          <Link
             href="/account/orders"
             aria-label={t("orderHistory")}
-            className="p-2 hover:bg-gray-50 rounded-full transition-colors hidden md:block"
+            className="hidden h-10 w-10 place-items-center rounded-full transition-colors hover:bg-gray-50 lg:grid"
           >
             <History size={20} strokeWidth={2} />
           </Link>

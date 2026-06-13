@@ -12,45 +12,9 @@ function getCookie(name: string) {
 const MOCK_AUTH_ENABLED = process.env.NEXT_PUBLIC_ENABLE_MOCK_AUTH === "true";
 
 export function createClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  if (!url || !anonKey) {
-    console.error("Supabase environment variables are missing!");
-    const dummyClient = {
-      auth: {
-        getUser: async () => ({ data: { user: null }, error: { message: "Supabase URL or Anon Key is not configured." } }),
-        getSession: async () => ({ data: { session: null }, error: { message: "Supabase URL or Anon Key is not configured." } }),
-        signOut: async () => {
-          if (typeof document !== "undefined") {
-            document.cookie = "sb-access-token=; Max-Age=0; path=/";
-            document.cookie = "sb-refresh-token=; Max-Age=0; path=/";
-          }
-          return { error: null };
-        },
-      },
-      from: (table: string) => {
-        const chainable = {
-          select: () => chainable,
-          eq: () => chainable,
-          order: () => chainable,
-          limit: () => chainable,
-          single: () => Promise.resolve({ data: null, error: { message: "Supabase URL or Anon Key is not configured." } }),
-          maybeSingle: () => Promise.resolve({ data: null, error: { message: "Supabase URL or Anon Key is not configured." } }),
-          insert: () => chainable,
-          update: () => chainable,
-          upsert: () => chainable,
-          then: (cb: any) => cb({ data: null, error: { message: "Supabase URL or Anon Key is not configured." } }),
-        };
-        return chainable;
-      }
-    };
-    return dummyClient as any;
-  }
-
   const client = createBrowserClient(
-    url,
-    anonKey
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
 
   const token = getCookie("sb-access-token");

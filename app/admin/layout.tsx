@@ -79,7 +79,7 @@ export default async function AdminLayout({
           </form>
         </div>
 
-        <div className="p-3 flex-1">
+        <div className="p-3 flex-1 overflow-y-auto">
           <AdminNav />
         </div>
 
@@ -95,7 +95,7 @@ export default async function AdminLayout({
 
       {/* Main */}
       <div className="min-w-0">
-        <div className="p-6 lg:p-10 max-w-5xl">{children}</div>
+        <div className="p-4 sm:p-6 lg:p-10 max-w-5xl">{children}</div>
       </div>
     </div>
   );

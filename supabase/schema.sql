@@ -87,22 +87,6 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
 
--- Sync profile role to auth.users raw_app_meta_data
-create or replace function public.sync_profile_role_to_auth_user()
-returns trigger language plpgsql security definer set search_path = auth, public as $$
-begin
-  update auth.users
-  set raw_app_meta_data = coalesce(raw_app_meta_data, '{}'::jsonb) || jsonb_build_object('role', new.role::text)
-  where id = new.id;
-  return new;
-end;
-$$;
-
-drop trigger if exists on_profile_role_sync on public.profiles;
-create trigger on_profile_role_sync
-  after insert or update of role on public.profiles
-  for each row execute function public.sync_profile_role_to_auth_user();
-
 -- ── CATEGORIES ──────────────────────────────────────────────────────────────
 create table if not exists public.categories (
   id          uuid primary key default gen_random_uuid(),
@@ -342,29 +326,11 @@ end $$;
 
 -- ── HELPER FUNCTION: is_admin() ─────────────────────────────────────────────
 create or replace function public.is_admin()
-returns boolean language plpgsql security definer set search_path = public stable as $$
-declare
-  current_uid uuid;
-  user_role text;
-begin
-  current_uid := auth.uid();
-  if current_uid is null then
-    return false;
-  end if;
-
-  -- 1. Check JWT claim first (fast, no DB query)
-  user_role := auth.jwt() -> 'app_metadata' ->> 'role';
-  if user_role = 'admin' then
-    return true;
-  end if;
-
-  -- 2. Fall back to auth.users metadata query (safe, no RLS, no recursion)
-  return exists (
-    select 1 from auth.users
-    where id = current_uid
-      and (raw_app_meta_data ->> 'role') = 'admin'
+returns boolean language sql security definer set search_path = public stable as $$
+  select exists (
+    select 1 from public.profiles
+    where id = auth.uid() and role = 'admin'
   );
-end;
 $$;
 
 create or replace function public.log_order_status_event()
@@ -563,6 +529,16 @@ create policy "analytics_events_admin_read" on public.analytics_events
   for select using (public.is_admin());
 
 -- ── SEED DATA (matches the homepage demo cards) ─────────────────────────────
+insert into public.categories (slug, name, description, position) values
+  ('brownies',  'BROWNIES',      'Delicious freshly baked brownies', 1),
+  ('birthday-cakes',  'Birthday Cakes',      'Artisan custom cakes', 2),
+  ('cold-beverages',  'COLD BEVERAGES',      'Refreshing cold drinks', 3),
+  ('special-desserts',  'Thennaiyan Specials',      'Signature specials', 4),
+  ('dessert',  'Dessert',      'Gourmet sweet treats', 5),
+  ('hot-serves',  'Hot Serves',      'Hot beverages and foods', 6),
+  ('main-course',  'Main Course',      'Savory food selections', 7),
+  ('make-it-a-meal',  'Make It A Meal',      'Meal packages', 8)
+on conflict (slug) do nothing;
 
 -- ════════════════════════════════════════════════════════════════════════════
 -- ADMIN CMS ADDITIONS

@@ -91,8 +91,8 @@ export function ProductDetailsModal({
   const isVirgin = product.slug.includes("virgin");
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/45 p-4 backdrop-blur-sm overflow-y-auto">
-      <section className="w-full max-w-md my-8 overflow-hidden rounded-2xl bg-white shadow-2xl border border-gray-100 flex flex-col">
+    <div className="fixed inset-0 z-50 grid place-items-center overflow-y-auto bg-black/45 p-2 backdrop-blur-sm sm:p-4">
+      <section className="my-2 flex max-h-[calc(100dvh-1rem)] w-full max-w-lg flex-col overflow-hidden rounded-[8px] border border-gray-100 bg-white shadow-2xl sm:my-6">
         {/* Header Visual */}
         <div className="relative aspect-[16/9] flex-shrink-0 bg-gray-100 overflow-hidden">
           <img
@@ -113,16 +113,16 @@ export function ProductDetailsModal({
             <p className="font-body text-[10px] font-extrabold uppercase tracking-[0.18em] text-white/85">
               {t("batchLabel")} {product.batch} - {product.pressed}
             </p>
-            <h2 className="mt-1 truncate font-body text-xl font-extrabold text-white">
+            <h2 className="mt-1 line-clamp-2 font-body text-lg font-extrabold leading-tight text-white sm:text-xl">
               {product.name}
             </h2>
           </div>
         </div>
 
         {/* Scrollable Body Content */}
-        <div className="p-5 space-y-5 overflow-y-auto max-h-[60vh] scrollbar-none">
-          <div className="flex items-start justify-between gap-4">
-            <div>
+        <div className="scrollbar-none flex-1 space-y-5 overflow-y-auto p-4 sm:p-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+            <div className="min-w-0">
               <p className="font-body text-xs font-bold text-gray-400 uppercase tracking-wide">
                 {product.variant}
               </p>
@@ -131,7 +131,7 @@ export function ProductDetailsModal({
                 {activePrice.toFixed(2)}
               </p>
             </div>
-            <div className="text-right">
+            <div className="text-left sm:text-right">
               <span className="rounded-full bg-leaf-mist px-3 py-1 font-body text-[10px] font-extrabold uppercase tracking-wide text-leaf border border-leaf/10">
                 {t("naturalBadge")}
               </span>
@@ -158,7 +158,7 @@ export function ProductDetailsModal({
                     type="button"
                     onClick={() => setSelectedVariantIndex(idx)}
                     className={cn(
-                      "px-4 py-2 text-xs font-bold font-body rounded-full border transition-all select-none",
+                      "min-h-10 rounded-full border px-3 py-2 font-body text-xs font-bold transition-all select-none sm:px-4",
                       v.stock === 0
                         ? "border-gray-200 bg-gray-50 text-gray-300 cursor-not-allowed line-through"
                         : selectedVariantIndex === idx
@@ -187,12 +187,12 @@ export function ProductDetailsModal({
                 {product.benefits.slice(0, 4).map((benefit) => (
                   <div
                     key={benefit}
-                    className="flex items-center gap-2.5 rounded-lg bg-gray-50/50 border border-gray-100 px-3 py-2 font-body text-xs font-bold text-gray-700"
+                    className="flex items-start gap-2.5 rounded-lg border border-gray-100 bg-gray-50/50 px-3 py-2 font-body text-xs font-bold text-gray-700"
                   >
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-leaf text-white shadow-xs">
                       <Check size={10} strokeWidth={3.5} />
                     </span>
-                    <span>{benefit}</span>
+                    <span className="min-w-0 break-safe">{benefit}</span>
                   </div>
                 ))}
               </div>
@@ -213,7 +213,7 @@ export function ProductDetailsModal({
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-[11px] font-body font-bold text-gray-700">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-[11px] font-body font-bold text-gray-700">
               <div className="flex justify-between border-b border-gray-100 py-1">
                 <span className="text-gray-400 font-semibold">{t("extractionMethod")}:</span>
                 <span className="text-ink">{isVirgin ? "Centrifuge" : "Wood Press"}</span>
@@ -235,7 +235,7 @@ export function ProductDetailsModal({
                 <span className="text-[#217743]">0.08%</span>
               </div>
               {isVirgin && (
-                <div className="flex justify-between border-b border-gray-100 py-1 col-span-2">
+                <div className="flex justify-between border-b border-gray-100 py-1 sm:col-span-2">
                   <span className="text-gray-400 font-semibold">{t("lauricAcid")}:</span>
                   <span className="text-[#217743]">51.4% (Rich Immunity)</span>
                 </div>
@@ -294,11 +294,11 @@ export function ProductDetailsModal({
               </button>
             )}
             
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               <button
                 type="button"
                 onClick={onClose}
-                className="h-10 rounded-full border border-gray-200 hover:bg-gray-50 text-gray-500 font-body text-xs font-bold transition-all duration-200 select-none"
+                className="min-h-10 rounded-full border border-gray-200 font-body text-xs font-bold text-gray-500 transition-all duration-200 hover:bg-gray-50 select-none"
               >
                 Close
               </button>
@@ -306,7 +306,7 @@ export function ProductDetailsModal({
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full border border-leaf text-leaf font-body text-xs font-bold hover:bg-leaf/5 transition-all duration-200 select-none"
+                className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-full border border-leaf px-3 text-center font-body text-xs font-bold text-leaf transition-all duration-200 hover:bg-leaf/5 select-none"
               >
                 <MessageCircle size={14} />
                 <span>WhatsApp Enquiry</span>

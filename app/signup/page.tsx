@@ -22,9 +22,9 @@ export default async function SignupPage({
         <div className="w-full max-w-md bg-white rounded-[16px] shadow-[0_12px_36px_rgba(31,107,59,0.08)] overflow-hidden">
           <section className="bg-[#1f6b3b] px-6 py-8 text-center text-white">
             <img
-              src="/logo.png"
+              src="/logo.jpg"
               alt="Thennaiyan"
-              className="mx-auto h-16 w-16 object-contain border-2 border-white/20"
+              className="mx-auto h-16 w-16 rounded-full object-cover border-2 border-white/20"
             />
             <h1 className="mt-4 font-body text-3xl font-extrabold">
               Create Account

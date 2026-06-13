@@ -28,7 +28,6 @@ function parseProduct(formData: FormData) {
     origin: String(formData.get("origin") ?? "").trim() || "Madurai",
     starting_from_inr: Number(formData.get("starting_from_inr") ?? 0) || 0,
     rating: ratingRaw ? Number(ratingRaw) : null,
-    brand: String(formData.get("brand") ?? "").trim() || "Thennaiyan",
     benefits,
     hue_a: String(formData.get("hue_a") ?? "").trim() || "#D4A24C",
     hue_b: String(formData.get("hue_b") ?? "").trim() || "#A8762A",

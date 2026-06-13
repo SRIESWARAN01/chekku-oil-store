@@ -27,7 +27,7 @@ export function StickyFooterActions({
       : `Hi, I'd like to place a business enquiry with ${displayName}.`;
 
   return (
-    <div className="hidden md:block fixed bottom-0 inset-x-0 bg-white/95 border-t border-gray-100 p-4 shadow-[0_-5px_15px_rgba(0,0,0,0.05)] backdrop-blur z-30">
+    <div className="fixed inset-x-0 bottom-0 z-30 hidden border-t border-gray-100 bg-white/95 p-4 shadow-[0_-5px_15px_rgba(0,0,0,0.05)] backdrop-blur lg:block">
       <div className="max-w-lg mx-auto grid grid-cols-2 gap-3">
         <a
           href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(cartText)}`}

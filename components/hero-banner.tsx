@@ -22,7 +22,7 @@ export function HeroBanner({
 
   return (
     <section 
-      className="relative text-white text-center py-16 px-4 md:py-24 lg:py-32 transition-all duration-300 bg-cover bg-center bg-no-repeat"
+      className="relative bg-cover bg-center bg-no-repeat px-4 py-12 text-center text-white transition-all duration-300 sm:px-6 sm:py-16 md:py-20 lg:py-24 xl:py-28"
       style={{
         backgroundImage: heroBannerImage ? `url(${heroBannerImage})` : "none",
         backgroundColor: heroBannerImage ? "transparent" : "#1f6b3b",
@@ -33,29 +33,29 @@ export function HeroBanner({
         <div className="absolute inset-0 bg-black/60 backdrop-blur-[0.5px] z-0" />
       )}
 
-      <div className="relative max-w-3xl mx-auto flex flex-col items-center z-10">
+      <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center">
         {/* Coconut Emoji */}
         <span
-          className="text-4xl md:text-5xl mb-4 animate-bounce"
+          className="mb-4 text-4xl animate-bounce md:text-5xl"
           style={{ animationDuration: "2.5s" }}
         >
           🥥
         </span>
 
-        <h1 className="font-body font-extrabold text-4xl md:text-5xl lg:text-6xl tracking-tight text-white mb-4 leading-tight">
+        <h1 className="mb-4 max-w-full font-body text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
           {displayTitle}
         </h1>
 
-        <p className="font-body text-base md:text-lg lg:text-xl font-bold text-white/95 mb-2 max-w-xl">
+        <p className="mb-2 max-w-xl font-body text-base font-bold text-white/95 md:text-lg lg:text-xl">
           {displaySubtitle}
         </p>
-        <p className="font-body text-xs md:text-sm text-white/80 mb-8 max-w-lg">
+        <p className="mb-8 max-w-lg font-body text-xs text-white/80 md:text-sm">
           {t("exploreWhatsApp")}
         </p>
 
         <a
           href="#products"
-          className="px-8 py-3 bg-white text-leaf hover:bg-gray-100 font-bold rounded-full text-sm md:text-base shadow-lg transition-all duration-200 hover:scale-105 active:scale-95"
+          className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-white px-6 py-3 text-center text-sm font-bold text-leaf shadow-lg transition-all duration-200 hover:scale-105 hover:bg-gray-100 active:scale-95 sm:px-8 md:text-base"
         >
           {t("browseProducts")}
         </a>

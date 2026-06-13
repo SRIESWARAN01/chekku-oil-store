@@ -137,7 +137,7 @@ export function ProductCard({
       {/* Lower area — Body and actions */}
       <div className="p-4 flex flex-col justify-between flex-grow space-y-3">
         {/* Price & Best Seller tag */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <span className="font-body font-extrabold text-lg text-leaf">
             ₹{Number(data.startingFrom).toFixed(2)}
           </span>
@@ -149,7 +149,7 @@ export function ProductCard({
         </div>
 
         {/* Action buttons */}
-        <div className="grid grid-cols-2 gap-2 pt-1">
+        <div className="grid grid-cols-1 gap-2 pt-1 sm:grid-cols-2">
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -174,7 +174,7 @@ export function ProductCard({
               }, 600);
             }}
             className={cn(
-              "btn-primary !px-2.5 !py-2 !text-xs rounded-full flex items-center justify-center gap-1.5 transition-all duration-300 w-full",
+              "btn-primary flex min-h-10 w-full items-center justify-center gap-1.5 rounded-full !px-2.5 !py-2 !text-xs transition-all duration-300",
               addingState === "adding" && "opacity-80 scale-95",
               addingState === "added" && "bg-emerald-600 hover:bg-emerald-700 border-emerald-600"
             )}
@@ -209,7 +209,7 @@ export function ProductCard({
               e.stopPropagation();
               handleCardClick();
             }}
-            className="btn-secondary !px-2.5 !py-2 !text-xs rounded-full hover:bg-leaf/5"
+            className="btn-secondary min-h-10 rounded-full !px-2.5 !py-2 !text-xs hover:bg-leaf/5"
           >
             {t("viewDetails")}
           </button>

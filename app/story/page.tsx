@@ -63,7 +63,7 @@ export default async function StoryPage() {
                 </p>
               </div>
 
-              <div className="bg-kernel p-8 lg:p-10 border hairline shadow-sm space-y-8">
+              <div className="bg-kernel p-5 sm:p-8 lg:p-10 border hairline shadow-sm space-y-8">
                 <div className="flex items-center justify-between border-b border-shell/15 pb-6">
                   <div>
                     <span className="font-mono text-eyebrow text-oil uppercase">
@@ -98,7 +98,7 @@ export default async function StoryPage() {
                     <span className="font-mono text-xs text-shell-husk flex items-center gap-1.5">
                       <FileText size={14} className="text-leaf" /> GST Number (GSTIN)
                     </span>
-                    <p className="font-mono font-semibold text-ink">
+                    <p className="font-mono font-semibold text-ink break-all">
                       {settings.gst_number}
                     </p>
                   </div>
@@ -264,7 +264,7 @@ export default async function StoryPage() {
               <h3 className="font-display text-3xl text-leaf-deep font-extrabold" style={{ fontVariationSettings: "'SOFT' 50, 'opsz' 24" }}>
                 Managing Director's Profile
               </h3>
-              <div className="bg-gray-50 border border-gray-100 p-6 rounded-2xl space-y-2">
+              <div className="bg-gray-50 border border-gray-100 p-4 sm:p-6 rounded-2xl space-y-2">
                 <p className="font-display text-xl font-bold text-ink">Mr. Tamil Arashan</p>
                 <p className="font-mono text-xs text-leaf font-bold uppercase tracking-wider">Managing Director</p>
                 <p className="font-body text-sm text-shell leading-relaxed mt-2">
