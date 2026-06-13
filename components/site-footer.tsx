@@ -10,7 +10,7 @@ export async function SiteFooter() {
           <div>
             <div className="mb-4 flex items-center gap-2 text-lg font-bold text-white">
               <img
-                src="/logo.jpg"
+                src="/logo.png"
                 alt={settings.brand_short}
                 className="h-8 w-8 rounded-full border border-leaf/20 object-cover"
               />

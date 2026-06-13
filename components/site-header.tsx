@@ -20,7 +20,7 @@ export function SiteHeader() {
         {/* Logo and Brand */}
         <Link href="/" className="flex min-w-0 items-center gap-2 transition-opacity hover:opacity-90">
           <img
-            src="/logo.jpg"
+            src="/logo.png"
             alt={t("brand")}
             className="h-9 w-9 shrink-0 rounded-full border border-leaf/10 object-cover"
           />
