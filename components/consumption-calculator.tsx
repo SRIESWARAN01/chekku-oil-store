@@ -18,11 +18,11 @@ export function ConsumptionCalculator() {
 
   return (
     <div className="mx-auto max-w-2xl rounded-2xl border border-leaf/10 bg-white p-4 sm:p-6 shadow-[0_10px_35px_-10px_rgba(33,119,67,0.08)]">
-      <div className="flex items-center gap-2 mb-2">
+      <div className="mb-2 flex items-start gap-2">
         <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-leaf/10 text-leaf">
           <Sparkles size={16} className="fill-leaf/20" />
         </span>
-        <h2 className="font-body text-xl font-extrabold text-ink">
+        <h2 className="font-body text-lg font-extrabold leading-tight text-ink sm:text-xl">
           {t("calcTitle")}
         </h2>
       </div>
@@ -106,7 +106,7 @@ export function ConsumptionCalculator() {
           </div>
 
           {/* Key Metric: Savings & Health */}
-          <div className="border-t border-gray-200/80 pt-3 grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 gap-2 border-t border-gray-200/80 pt-3 sm:grid-cols-2">
             <div className="bg-white border border-gray-100 p-2.5 rounded-lg">
               <p className="font-body text-[10px] text-gray-400 font-bold uppercase tracking-wider">
                 {t("calcEstimatedSavings")}

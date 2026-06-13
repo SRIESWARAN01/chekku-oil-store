@@ -214,30 +214,30 @@ export function ProductDetailsModal({
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-[11px] font-body font-bold text-gray-700">
-              <div className="flex justify-between border-b border-gray-100 py-1">
+              <div className="flex flex-col gap-0.5 border-b border-gray-100 py-1 sm:flex-row sm:justify-between">
                 <span className="text-gray-400 font-semibold">{t("extractionMethod")}:</span>
-                <span className="text-ink">{isVirgin ? "Centrifuge" : "Wood Press"}</span>
+                <span className="text-ink sm:text-right">{isVirgin ? "Centrifuge" : "Wood Press"}</span>
               </div>
-              <div className="flex justify-between border-b border-gray-100 py-1">
+              <div className="flex flex-col gap-0.5 border-b border-gray-100 py-1 sm:flex-row sm:justify-between">
                 <span className="text-gray-400 font-semibold">{t("origin")}:</span>
-                <span className="text-ink">Madurai, TN</span>
+                <span className="text-ink sm:text-right">Madurai, TN</span>
               </div>
-              <div className="flex justify-between border-b border-gray-100 py-1">
+              <div className="flex flex-col gap-0.5 border-b border-gray-100 py-1 sm:flex-row sm:justify-between">
                 <span className="text-gray-400 font-semibold">FFA:</span>
-                <span className="text-[#217743]">{isVirgin ? "0.08%" : "0.12%"}</span>
+                <span className="text-[#217743] sm:text-right">{isVirgin ? "0.08%" : "0.12%"}</span>
               </div>
-              <div className="flex justify-between border-b border-gray-100 py-1">
+              <div className="flex flex-col gap-0.5 border-b border-gray-100 py-1 sm:flex-row sm:justify-between">
                 <span className="text-gray-400 font-semibold">Peroxide:</span>
-                <span className="text-[#217743]">0.6 meq/kg</span>
+                <span className="text-[#217743] sm:text-right">0.6 meq/kg</span>
               </div>
-              <div className="flex justify-between border-b border-gray-100 py-1">
+              <div className="flex flex-col gap-0.5 border-b border-gray-100 py-1 sm:flex-row sm:justify-between">
                 <span className="text-gray-400 font-semibold">Moisture:</span>
-                <span className="text-[#217743]">0.08%</span>
+                <span className="text-[#217743] sm:text-right">0.08%</span>
               </div>
               {isVirgin && (
-                <div className="flex justify-between border-b border-gray-100 py-1 sm:col-span-2">
+                <div className="flex flex-col gap-0.5 border-b border-gray-100 py-1 sm:col-span-2 sm:flex-row sm:justify-between">
                   <span className="text-gray-400 font-semibold">{t("lauricAcid")}:</span>
-                  <span className="text-[#217743]">51.4% (Rich Immunity)</span>
+                  <span className="text-[#217743] sm:text-right">51.4% (Rich Immunity)</span>
                 </div>
               )}
             </div>

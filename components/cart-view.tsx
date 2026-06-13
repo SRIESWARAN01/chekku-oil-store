@@ -189,7 +189,7 @@ export function CartView({ settings }: CartViewProps) {
             {items.map((item) => (
               <div
                 key={`${item.product.slug}-${item.selectedSize}`}
-                className="flex gap-4 p-4 rounded-xl border border-gray-200 bg-white shadow-xs"
+                className="flex flex-col gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-xs sm:flex-row"
               >
                 <div className="h-16 w-16 shrink-0 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
                   {item.product.image ? (
@@ -211,7 +211,7 @@ export function CartView({ settings }: CartViewProps) {
                 </div>
 
                 <div className="min-w-0 flex-1">
-                  <h3 className="truncate font-body text-sm font-extrabold text-[#111827]">
+                  <h3 className="line-clamp-2 font-body text-sm font-extrabold text-[#111827]">
                     {item.product.name}
                   </h3>
                   <p className="mt-0.5 font-body text-xs text-gray-400 font-bold uppercase tracking-wider">
@@ -222,7 +222,7 @@ export function CartView({ settings }: CartViewProps) {
                   </p>
                 </div>
 
-                <div className="flex flex-col items-end justify-between shrink-0">
+                <div className="flex flex-row items-center justify-between gap-3 sm:flex-col sm:items-end">
                   <button
                     onClick={() => removeItem(item.product.slug, item.selectedSize)}
                     className="text-gray-400 hover:text-red-500 p-1 rounded transition-colors"
@@ -258,7 +258,7 @@ export function CartView({ settings }: CartViewProps) {
                 Apply Coupon Code
               </span>
               
-              <form onSubmit={handleApplyCoupon} className="flex gap-2">
+              <form onSubmit={handleApplyCoupon} className="flex flex-col gap-2 sm:flex-row">
                 <input
                   type="text"
                   value={couponCode}
@@ -271,7 +271,7 @@ export function CartView({ settings }: CartViewProps) {
                   <button
                     type="button"
                     onClick={handleRemoveCoupon}
-                    className="h-10 px-4 rounded-lg border border-red-200 hover:border-red-500 hover:bg-red-50/20 text-xs font-bold text-red-500 transition-all"
+                    className="min-h-10 rounded-lg border border-red-200 px-4 text-xs font-bold text-red-500 transition-all hover:border-red-500 hover:bg-red-50/20"
                   >
                     Remove
                   </button>
@@ -279,7 +279,7 @@ export function CartView({ settings }: CartViewProps) {
                   <button
                     type="submit"
                     disabled={couponLoading || !couponCode.trim()}
-                    className="h-10 px-5 rounded-lg bg-[#1f6b3b] disabled:bg-gray-100 disabled:text-gray-400 text-white text-xs font-bold hover:bg-[#154b29] transition-all flex items-center justify-center gap-1.5"
+                    className="flex min-h-10 items-center justify-center gap-1.5 rounded-lg bg-[#1f6b3b] px-5 text-xs font-bold text-white transition-all hover:bg-[#154b29] disabled:bg-gray-100 disabled:text-gray-400"
                   >
                     <Tag size={12} />
                     {couponLoading ? "Verifying..." : "Apply"}
@@ -311,7 +311,7 @@ export function CartView({ settings }: CartViewProps) {
               <span className="mb-3.5 font-body text-xs font-bold text-gray-700 uppercase tracking-wider block">
                 Order Type
               </span>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <button
                   onClick={() => setOrderType("whatsapp")}
                   className={cn(

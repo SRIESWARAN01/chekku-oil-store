@@ -37,6 +37,13 @@ export interface ProductRow {
   hue_a: string;
   hue_b: string;
   categories?: { slug: string } | { slug: string }[] | null;
+  product_variants?: {
+    id: string;
+    size_label: string;
+    price_inr: number | string;
+    stock: number;
+    is_active: boolean;
+  }[] | null;
   is_veg?: boolean;
   is_best_seller?: boolean;
 }
@@ -138,6 +145,15 @@ export function mapProductRowToCard(row: ProductRow): ProductCardData {
     isVeg: row.is_veg ?? true,
     isBestSeller: row.is_best_seller ?? true,
     image: row.hero_image ?? undefined,
+    inStock: row.is_active,
+    variants: (row.product_variants ?? [])
+      .filter((variant) => variant.is_active)
+      .map((variant) => ({
+        id: variant.id,
+        sizeLabel: variant.size_label,
+        priceInr: Number(variant.price_inr) || 0,
+        stock: Number(variant.stock) || 0,
+      })),
   };
 }
 
@@ -148,7 +164,7 @@ export async function getProducts(): Promise<ProductCardData[]> {
     const supabase = await createClient();
     const { data, error } = await supabase
       .from("products")
-      .select("*, categories(slug)")
+      .select("*, categories(slug), product_variants(id, size_label, price_inr, stock, is_active)")
       .eq("is_active", true)
       .order("position", { ascending: true });
     if (error || !data) return [];

@@ -22,7 +22,7 @@ export function CheckoutForm({ items, defaultName, defaultPhone }: Props) {
           href={state.whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 flex items-center gap-2 rounded-[8px] bg-[#25d366] px-8 py-4 font-body text-base font-extrabold text-white hover:bg-[#20bd5a] transition-colors"
+        className="mt-6 flex min-h-[48px] items-center justify-center gap-2 rounded-[8px] bg-[#25d366] px-6 py-3 text-center font-body text-sm font-extrabold text-white transition-colors hover:bg-[#20bd5a] sm:px-8 sm:py-4 sm:text-base"
         >
           <MessageCircle size={20} /> Open WhatsApp
         </a>
@@ -31,9 +31,9 @@ export function CheckoutForm({ items, defaultName, defaultPhone }: Props) {
   }
 
   return (
-    <form action={formAction} className="grid gap-6 lg:grid-cols-[1fr_340px]">
+    <form action={formAction} className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,340px)]">
       <div className="space-y-5">
-        <div className="rounded-[8px] bg-white p-5 shadow-[0_4px_12px_rgba(15,23,42,0.06)]">
+        <div className="rounded-[8px] bg-white p-4 shadow-[0_4px_12px_rgba(15,23,42,0.06)] sm:p-5">
           <p className="font-body text-xs font-extrabold uppercase tracking-wider text-[#667085] mb-4">Delivery details</p>
           <div className="grid gap-4 sm:grid-cols-2">
             {[{label:"Full name",name:"ship_full_name",type:"text",placeholder:"Ravi Kumar",defaultValue:defaultName},
@@ -54,7 +54,7 @@ export function CheckoutForm({ items, defaultName, defaultPhone }: Props) {
           </div>
         </div>
 
-        <div className="rounded-[8px] bg-white p-5 shadow-[0_4px_12px_rgba(15,23,42,0.06)]">
+        <div className="rounded-[8px] bg-white p-4 shadow-[0_4px_12px_rgba(15,23,42,0.06)] sm:p-5">
           <p className="font-body text-xs font-extrabold uppercase tracking-wider text-[#667085] mb-3">Coupon code</p>
           <input name="coupon_code" placeholder="Optional coupon code" className="w-full border border-[#d0d5dd] rounded-[6px] px-3 py-2 font-mono text-base md:text-sm uppercase outline-none focus:border-[#356f3b]" />
         </div>
@@ -64,8 +64,8 @@ export function CheckoutForm({ items, defaultName, defaultPhone }: Props) {
         <div className="rounded-[8px] bg-white p-4 shadow-[0_4px_12px_rgba(15,23,42,0.06)]">
           <p className="font-body text-xs font-extrabold uppercase tracking-wider text-[#667085] mb-3">Order summary</p>
           {items.map((i) => (
-            <div key={i.name+i.size} className="flex justify-between py-1.5 font-body text-sm text-[#111827]">
-              <span className="truncate mr-2">{i.name} ({i.size}) x{i.qty}</span>
+            <div key={i.name+i.size} className="flex flex-col gap-1 py-1.5 font-body text-sm text-[#111827] sm:flex-row sm:justify-between">
+              <span className="min-w-0 break-safe sm:mr-2">{i.name} ({i.size}) x{i.qty}</span>
               <span className="flex-shrink-0">{INR}{(i.price*i.qty).toFixed(2)}</span>
             </div>
           ))}

@@ -11,3 +11,8 @@ next-env.d.ts
 *.tsbuildinfo
 
 /lib/generated/prisma
+
+# Temporary / backup files
+README.zip
+scratch/
+
