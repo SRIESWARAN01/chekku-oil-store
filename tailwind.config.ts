@@ -42,7 +42,7 @@ const config: Config = {
         ink: "#111827",       // text-gray-900
       },
       fontFamily: {
-        display: ["var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "ui-sans-serif", "system-ui", "sans-serif"],
         body: ["var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },

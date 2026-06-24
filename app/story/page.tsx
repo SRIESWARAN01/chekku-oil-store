@@ -1,9 +1,10 @@
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { BatchStamp } from "@/components/batch-stamp";
-import { User, MapPin, FileText, Calendar, Building, Landmark } from "lucide-react";
+import { User, MapPin, FileText, Calendar, Building, Landmark, GraduationCap, Quote } from "lucide-react";
 import { getSettings } from "@/lib/queries";
 import { FaqAccordion } from "@/components/faq-accordion";
+import Image from "next/image";
 
 export const metadata = {
   title: "Our Story - Thennaiyan Coconut Company",
@@ -261,18 +262,112 @@ export default async function StoryPage() {
             </div>
 
             {/* Leadership Profile */}
-            <div className="pt-12 border-t border-shell/10 space-y-4">
-              <span className="eyebrow text-leaf">Leadership</span>
-              <h3 className="font-display text-3xl text-leaf-deep font-extrabold" style={{ fontVariationSettings: "'SOFT' 50, 'opsz' 24" }}>
-                Managing Director's Profile
-              </h3>
-              <div className="bg-gray-50 border border-gray-100 p-4 sm:p-6 rounded-2xl space-y-2">
-                <p className="font-display text-xl font-bold text-ink">Mr. Tamil Arashan</p>
-                <p className="font-mono text-xs text-leaf font-bold uppercase tracking-wider">Managing Director</p>
-                <p className="font-body text-sm text-shell leading-relaxed mt-2">
-                  Completing his BBA in May 2025, Mr. Tamil Arashan established his own export venture, <strong>Thennaiyan Export</strong>, in July 2025. Guided by his leadership, the company integrates traditional values with modern export standards to offer outstanding sustainable solutions to worldwide clients.
+            <div className="pt-16 border-t border-shell/10 space-y-12">
+              <div className="space-y-4">
+                <span className="eyebrow text-leaf">Leadership & Vision</span>
+                <h3 className="font-display text-4xl text-leaf-deep font-extrabold" style={{ fontVariationSettings: "'SOFT' 50, 'opsz' 24" }}>
+                  Founder & CEO Profile
+                </h3>
+              </div>
+
+              {/* Grid Layout for Profile and Image */}
+              <div className="grid lg:grid-cols-[1.2fr_2fr] gap-8 lg:gap-12 items-start">
+                
+                {/* Photo Card */}
+                <div className="relative group mx-auto lg:mx-0 max-w-[320px] w-full">
+                  {/* Styled Frame */}
+                  <div className="absolute inset-0 border-2 border-oil rounded-2xl rotate-2 transition-transform duration-300 group-hover:rotate-0" />
+                  <div className="relative overflow-hidden rounded-2xl bg-kernel shadow-bottle border border-shell/10 transition-transform duration-300 group-hover:-translate-y-2">
+                    <div className="relative aspect-[3/4] w-full">
+                      <Image
+                        src="/images/tamilarasan.jpg"
+                        alt="Tamilarasan - Founder & CEO"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 320px"
+                        priority
+                      />
+                    </div>
+                    {/* Caption Card */}
+                    <div className="p-4 bg-kernel-deeper/80 backdrop-blur-sm border-t border-shell/10 text-center">
+                      <p className="font-display text-lg font-bold text-ink">Tamilarasan</p>
+                      <p className="font-mono text-[10px] text-leaf font-bold uppercase tracking-wider mt-0.5">Founder & Entrepreneur</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Profile Narrative & Details */}
+                <div className="space-y-6">
+                  
+                  {/* Quote block */}
+                  <div className="relative bg-leaf-mist/40 border-l-4 border-leaf p-5 rounded-r-xl shadow-sm">
+                    <Quote className="absolute top-3 right-3 text-leaf/10 w-12 h-12 pointer-events-none" />
+                    <p className="font-display text-lg lg:text-xl font-semibold text-leaf-deep italic leading-relaxed">
+                      “Building a brand with trust, quality, and a vision for a healthier future.”
+                    </p>
+                  </div>
+
+                  {/* Main Bio Paragraphs */}
+                  <div className="space-y-4 font-body text-sm lg:text-base text-shell leading-relaxed">
+                    <p>
+                      <strong>Tamilarasan</strong> is the Founder and Entrepreneur behind a growing coconut-based business, bringing together strong business knowledge, leadership skills, and a passion for creating high-quality natural products.
+                    </p>
+                    <p>
+                      He completed his <strong>Bachelor of Business Administration (BBA)</strong> from Dr. N.G.P. Arts and Science College and earned his <strong>Master of Business Administration (MBA)</strong> from Madurai Kamaraj University. His academic journey built a strong foundation in business strategy, management, and entrepreneurship, which he now applies to building and growing his company.
+                    </p>
+                    <p>
+                      As a business leader, Tamilarasan focuses on delivering premium-quality coconut products by combining traditional values with modern business practices. His vision is to create a trusted brand that represents purity, quality, and customer satisfaction.
+                    </p>
+                    <p>
+                      With dedication, innovation, and a commitment to excellence, he continues to grow his company and establish a strong presence in the coconut industry while creating long-term value for customers and partners.
+                    </p>
+                  </div>
+
+                  {/* Highlights Grid (BBA & MBA cards) */}
+                  <div className="grid sm:grid-cols-2 gap-4 pt-4">
+                    {/* BBA Card */}
+                    <div className="p-4 rounded-xl border border-shell/10 bg-kernel hover:shadow-md transition-shadow duration-200 flex gap-3.5 items-start">
+                      <div className="p-2.5 rounded-lg bg-leaf/10 text-leaf shrink-0">
+                        <GraduationCap size={20} />
+                      </div>
+                      <div>
+                        <h4 className="font-display font-bold text-ink text-sm">BBA Degree</h4>
+                        <p className="font-body text-xs text-shell-husk mt-0.5">Bachelor of Business Administration</p>
+                        <p className="font-body text-xs text-shell mt-1.5 font-semibold">Dr. N.G.P. Arts and Science College</p>
+                      </div>
+                    </div>
+
+                    {/* MBA Card */}
+                    <div className="p-4 rounded-xl border border-shell/10 bg-kernel hover:shadow-md transition-shadow duration-200 flex gap-3.5 items-start">
+                      <div className="p-2.5 rounded-lg bg-oil/15 text-oil-deep shrink-0">
+                        <GraduationCap size={20} />
+                      </div>
+                      <div>
+                        <h4 className="font-display font-bold text-ink text-sm">MBA Degree</h4>
+                        <p className="font-body text-xs text-shell-husk mt-0.5">Master of Business Administration</p>
+                        <p className="font-body text-xs text-shell mt-1.5 font-semibold">Madurai Kamaraj University</p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+              {/* Secondary section: "About Tamilarasan" context */}
+              <div className="bg-kernel-deeper/30 border border-shell/10 rounded-2xl p-6 sm:p-8 space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-leaf" />
+                  <h4 className="font-display text-lg font-bold text-leaf-deep">About Tamilarasan</h4>
+                </div>
+                <p className="font-body text-sm text-shell leading-relaxed">
+                  Tamilarasan is an entrepreneur and business professional with a strong academic background and a passion for building quality-driven businesses. Sourcing his foundation in business management, leadership, and entrepreneurship, he is focused on delivering high-quality products while promoting natural and trusted solutions for customers.
+                </p>
+                <p className="font-body text-sm text-shell leading-relaxed">
+                  Driven by innovation, commitment, and a vision for growth, he continues to expand his company with a focus on quality, customer satisfaction, and sustainable business practices. His journey reflects a combination of education, dedication, and entrepreneurial spirit.
                 </p>
               </div>
+
             </div>
 
           </div>
